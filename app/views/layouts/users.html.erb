@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>照片书 - 制作</title>
+  <%= stylesheet_link_tag    "users", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "users", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container" style="margin-top: 20px">
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+  <%= yield %>
+  <!--<div style="margin-top: 0">-->
+    <!--<%= debug(params) if Rails.env.development? %>-->
+  <!--</div>-->
+</div>
+</body>
+</html>
