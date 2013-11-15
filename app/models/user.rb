@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_one :klass
+
   before_create :create_remember_token
 
   validate :username, presence: true,

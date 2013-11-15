@@ -1,9 +1,18 @@
 Book::Application.routes.draw do
+  get "activities/index"
+  get "klasses/show"
   root 'sessions#new'
-  resources :users, only: [:index, :show]
+  resources :users, only: [:show] do
+    resource :klass, only: [:show]
+  end
+  resources :klasses, only: [] do
+    resources :activities, only: [:index]
+  end
   resources :sessions, only: [:new, :create, :destroy]
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'get'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

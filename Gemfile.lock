@@ -55,6 +55,8 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.2)
     pg (0.15.1)
+    pjax_rails (0.3.4)
+      jquery-rails
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -122,6 +124,7 @@ DEPENDENCIES
   jbuilder (= 1.0.2)
   jquery-rails (= 2.2.1)
   pg (= 0.15.1)
+  pjax_rails (= 0.3.4)
   rails (= 4.0.0)
   rails_12factor (= 0.0.2)
   sass-rails (= 4.0.1)

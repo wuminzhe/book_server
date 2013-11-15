@@ -4,9 +4,9 @@
 
       <div class="navbar-header">
 
-        <a class="navbar-brand" href="#">照片书</a>
+        <a class="navbar-brand" href="#"><%= current_user.klass.name %></a>
       </div>
-
+      <p class="navbar-text"><%= Time.now %></p>
       <p class="navbar-text navbar-right"><%= current_user.username %> <a href="#" class="navbar-link"><%= link_to "退出", signout_path, method: :get %></a></p>
     </nav>
 
@@ -21,7 +21,7 @@
       </div>
 
       <div class="list-group">
-        <a href="#" class="list-group-item active">
+        <a href="<%= url_for klass_activities_path(current_user.klass) %>" class="list-group-item active">
           <span class="badge">230</span>
           <h4 class="list-group-item-heading">上传照片</h4>
           <p class="list-group-item-text">点击这里上传小朋友的照片，这里是所有功能的入口</p>
@@ -49,7 +49,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-9" role="main">
+  <div class="col-md-9" role="main" data-pjax-container>
     <ol class="breadcrumb">
       <li>制作</li>
       <li class="active">上传照片</li>
@@ -195,4 +195,5 @@
 </div>
 <footer>
   <p>© 某某某信息技术有限公司 2013 - <a href="#">联系我们</a> - <a href="#">关于我们</a></p>
+
 </footer>
