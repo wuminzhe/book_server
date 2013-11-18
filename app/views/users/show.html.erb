@@ -50,13 +50,13 @@
     </div>
   </div>
   <div class="col-md-9" role="main">
-    <ol class="breadcrumb">
+    <ol id="path" class="breadcrumb">
       <li>制作</li>
       <li class="active">上传照片</li>
     </ol>
 
     <div id="main" class="row">
-
+      <%= render partial: 'activities/activities', object: @user.klass.activities %>
     </div>
 
 
