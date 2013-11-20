@@ -3,7 +3,10 @@ class UsersController < ApplicationController
   before_action :correct_user_check,   only: [:show]
 
   def show
-    
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def index

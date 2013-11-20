@@ -1,0 +1,5 @@
+$("#main").html("<%= escape_javascript(render partial: 'pictures', object: @pictures) %>");
+$("#path").html(
+    '<li><a href="<%= url_for klass_activities_path(current_user.klass) %>" data-remote="true">所有上传</a></li>'+
+    '<li class="active"><%= @activity.title %></li>'
+);

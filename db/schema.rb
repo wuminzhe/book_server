@@ -11,14 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131115060926) do
+ActiveRecord::Schema.define(version: 20131120081013) do
 
   create_table "activities", force: true do |t|
     t.string   "title"
     t.integer  "klass_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "year"
   end
+
+  create_table "activity_picture_associations", force: true do |t|
+    t.integer  "activity_id"
+    t.integer  "picture_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activity_picture_associations", ["activity_id"], name: "index_activity_picture_associations_on_activity_id"
+  add_index "activity_picture_associations", ["picture_id"], name: "index_activity_picture_associations_on_picture_id"
 
   create_table "klasses", force: true do |t|
     t.string   "name"
@@ -28,6 +39,36 @@ ActiveRecord::Schema.define(version: 20131115060926) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pictures", force: true do |t|
+    t.string   "year"
+    t.integer  "used"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "src"
+  end
+
+  create_table "student_picture_associations", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "picture_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "student_picture_associations", ["picture_id"], name: "index_student_picture_associations_on_picture_id"
+  add_index "student_picture_associations", ["student_id"], name: "index_student_picture_associations_on_student_id"
+
+  create_table "students", force: true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.integer  "klass_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "number"
+    t.string   "avatar"
+  end
+
+  add_index "students", ["klass_id"], name: "index_students_on_klass_id"
 
   create_table "users", force: true do |t|
     t.string   "username"

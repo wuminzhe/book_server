@@ -1,0 +1,7 @@
+$("#main").html("<%= escape_javascript(render partial: 'pictures', object: @pictures) %>");
+$("#path").html(
+    '<li><a href="<%= url_for klass_students_path(@student.klass) %>" data-remote="true">所有学生</a></li>'+
+    '<li><a href="<%= url_for student_activities_path(@student) %>" data-remote="true"><%= @student.name %></a></li>'+
+    '<li class="active"><%= @activity.title %></li>'
+);
+//add_history_support();

@@ -1,0 +1,6 @@
+$("#main").html("<%= escape_javascript(render partial: 'activities', object: @student) %>");
+$("#path").html(
+    '<li><a href="<%= url_for klass_students_path(@student.klass) %>" data-remote="true">所有学生</a></li>'+
+    '<li class="active"><%= @student.name %></li>'
+);
+//add_history_support();

@@ -1,0 +1,5 @@
+$("#main").html("<%= escape_javascript(render partial: 'students', object: @students) %>");
+$("#path").html(
+    '<li class="active">所有学生</li>'
+);
+//add_history_support();
