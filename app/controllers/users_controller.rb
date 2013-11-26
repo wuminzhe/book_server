@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :correct_user_check,   only: [:show]
 
   def show
+    @pictures_count = current_user.klass.pictures.length
+    @students_count = current_user.klass.students.length
     respond_to do |format|
       format.html
       format.js

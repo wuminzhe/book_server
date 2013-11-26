@@ -1,8 +1,59 @@
+<!-- Upload Modal -->
+<div class="modal fade" id="upload_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+      </div>
+      <div class="modal-body" style="padding: 0">
+        <div id="uploader"></div>
+      </div>
+      <div class="modal-footer" style="margin-top: 1px">
+        <button type="button" class="btn btn-default" id="upload_dialog_cancel" data-dismiss="modal">取消</button>
+        <a id="upload_dialog_confirm" href="#" class="btn btn-primary" disabled="true">确定</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
-<% @pictures.each do |picture| %>
-  <div class="col-md-2">
-    <a href="#" class="thumbnail">
-      <img src="<%= picture.src %>" alt="...">
-    </a>
-  </div>
-<% end %>
+<!-- Move Modal -->
+<div class="modal fade" id="move_to_activities_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">移动图片至其他事件</h4>
+      </div>
+      <div class="modal-body">
+        <select id="activities" class="form-control">
+          <% @activities.each do |activity| %>
+          <option value="<%= activity.id %>"><%= activity.title %></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="move_to_activities_dialog_cancel" data-dismiss="modal">取消</button>
+        <a id="move_to_activities_dialog_confirm" href="#" class="btn btn-primary">确定</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<%
+   pictures = []
+   @pictures.each do |picture|
+     pictures << picture
+     if pictures.length == 6
+%>
+       <%= render :partial => 'row', :locals => { pictures: pictures } %>
+<%
+       pictures = []
+     end
+   end
+   if pictures.length > 0
+%>
+     <%= render :partial => 'row', :locals => { pictures: pictures } %>
+<%
+   end
+%>

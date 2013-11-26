@@ -22,7 +22,7 @@ end
 Picture.delete_all
 pictures = []
 21.times do |i|
-  pictures << Picture.create(src: 'http://photo.yupoo.com/smartpic/Djj3PPeS/medish.jpg')
+  pictures << Picture.create(src: 'http://pic.52mxp.com/site/cat_and_girl.jpg', klass: klass)
 end
 
 ActivityPictureAssociation.delete_all

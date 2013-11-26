@@ -17,12 +17,16 @@ Book::Application.routes.draw do
     resources :students, only: [:index]
   end
   resources :sessions, only: [:new, :create, :destroy]
+  resources :pictures, only: [:create]
 
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'get'
 
   match '/students/:student_id/activities', to: 'students#activities', via: 'get', as: 'student_activities'
   match '/students/:student_id/activities/:activity_id', to: 'students#pictures', via: 'get', as: 'student_activity_pictures'
+
+  match '/upload', to: 'pictures#upload', via: 'post'
+  match '/move_to_activity', to: 'pictures#move_to_activity', via: 'post'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

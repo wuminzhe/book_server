@@ -1,4 +1,31 @@
 /*
  *= require custom
  *= require_self
+ *= require jquery.plupload.queue
  */
+
+.plupload_header {
+  display: none;
+}
+
+.plupload_filelist_footer {
+  height: 37px!important;
+}
+
+.plupload_container {
+  padding: 0!important;
+}
+
+
+//.plupload_filelist_header, .plupload_filelist_footer {
+//  background: #3276b1!important;
+//  color: #fff!important;
+//}
+
+#actions {
+  padding: 8px 15px;
+}
+
+#main .selected {
+  border-color: rgb(66, 139, 202);
+}

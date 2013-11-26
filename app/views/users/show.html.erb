@@ -22,13 +22,13 @@
 
       <div class="list-group" id="operations">
         <a href="<%= url_for klass_activities_path(current_user.klass) %>" data-remote="true" id="update_images" class="list-group-item active">
-          <span class="badge">230</span>
+          <span class="badge"><%= @pictures_count %></span>
           <h4 class="list-group-item-heading">上传照片</h4>
           <p class="list-group-item-text">点击这里上传小朋友的照片，这里是所有功能的入口</p>
         </a>
 
         <a href="<%= url_for klass_students_path(current_user.klass) %>" data-remote="true" id="classify" class="list-group-item">
-        <span class="badge">31</span>
+        <span class="badge"><%= @students_count %></span>
           <h4 class="list-group-item-heading">照片归类</h4>
           <p class="list-group-item-text">
             说明一下归类是干嘛的
@@ -50,11 +50,20 @@
     </div>
   </div>
   <div class="col-md-9" role="main">
-    <ol id="path" class="breadcrumb">
-      <li class="active">所有上传</li>
-    </ol>
+    <div class="row">
+      <div class="col-md-6">
+        <ol id="path" class="breadcrumb">
+          <li class="active">所有上传</li>
+        </ol>
+      </div>
+      <div id="actions" class="col-md-6">
 
-    <div id="main" class="row">
+      </div>
+    </div>
+
+
+
+    <div id="main">
       <%= render partial: 'activities/activities', object: @user.klass.activities %>
     </div>
 
