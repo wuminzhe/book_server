@@ -9,5 +9,29 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require custom
+ *= require jquery.plupload.queue
  */
+
+/* 调整上传界面 */
+.plupload_header {
+    display: none;
+}
+.plupload_filelist_footer {
+    height: 37px!important;
+}
+.plupload_container {
+    padding: 0!important;
+}
+
+
+/* main里面的导航菜单 */
+#actions {
+    padding: 8px 15px;
+}
+
+
+/* 选去图片时的样式 */
+#main .selected {
+    border-color: rgb(66, 139, 202);
+}

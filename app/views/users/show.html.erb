@@ -21,7 +21,7 @@
       </div>
 
       <div class="list-group" id="operations">
-        <a href="<%= url_for klass_activities_path(current_user.klass) %>" data-remote="true" id="update_images" class="list-group-item active">
+        <a href="<%= url_for klass_activities_path(current_user.klass) %>" id="update_images" class="list-group-item active">
           <span class="badge"><%= @pictures_count %></span>
           <h4 class="list-group-item-heading">上传照片</h4>
           <p class="list-group-item-text">点击这里上传小朋友的照片，这里是所有功能的入口</p>
@@ -50,7 +50,7 @@
     </div>
   </div>
   <div class="col-md-9" role="main">
-    <div class="row">
+    <div id="nav_title" class="row">
       <div class="col-md-6">
         <ol id="path" class="breadcrumb">
           <li class="active">所有上传</li>

@@ -5,10 +5,6 @@ class UsersController < ApplicationController
   def show
     @pictures_count = current_user.klass.pictures.length
     @students_count = current_user.klass.students.length
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def index

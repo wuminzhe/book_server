@@ -1,18 +1,15 @@
-<ol class="breadcrumb">
-  <li>制作</li>
-  <li class="active">上传照片</li>
-</ol>
+<% content_for :title do ' - 活动' end %>
 
-<div class="row">
-  <% @activities.each do |activity| %>
-    <div class="col-md-2">
-      <a href="#" class="thumbnail">
-        <img src="http://pic.52mxp.com/site/text.png" alt="...">
-        <div class="caption" style="text-align: center">
-          <h5><%= activity.title %></h5>
-        </div>
-        <span class="badge">130</span>
-      </a>
-    </div>
-  <% end %>
+<div id="nav_title" class="row">
+  <div class="col-md-6">
+    <ol id="path" class="breadcrumb">
+      <li class="active">所有上传</li>
+    </ol>
+  </div>
+  <div id="actions" class="col-md-6">
+  </div>
+</div>
+
+<div id="main">
+  <%= render partial: 'activities', object: @activities %>
 </div>
