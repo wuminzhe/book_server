@@ -21,3 +21,4 @@ doc/
 
 # Ignore uploaded files
 /public/uploads
+/public/assets

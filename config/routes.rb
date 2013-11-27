@@ -28,6 +28,8 @@ Book::Application.routes.draw do
   match '/upload', to: 'pictures#upload', via: 'post'
   match '/move_to_activity', to: 'pictures#move_to_activity', via: 'post'
 
+  match '/test', to: 'pictures#test', via: 'get'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

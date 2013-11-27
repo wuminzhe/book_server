@@ -5,6 +5,8 @@ class SessionsController < ApplicationController
     if signed_in?
       redirect_to current_user
     end
+
+    render layout: false
   end
 
   def create

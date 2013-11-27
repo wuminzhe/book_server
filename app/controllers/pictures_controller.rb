@@ -46,4 +46,12 @@ class PicturesController < ApplicationController
     render json: { url: "http://#{request.host_with_port}/uploads/#{tmp_file.original_filename}" }
   end
 
+
+  def test
+    @part = 'baby'
+    respond_to do |format|
+      format.js
+    end
+  end
+
 end
