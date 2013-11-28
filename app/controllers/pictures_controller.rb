@@ -7,7 +7,6 @@ class PicturesController < ApplicationController
     @activity = Activity.find(params[:activity_id])
     @pictures = @activity.pictures
     @activities = current_user.klass.activities #用于转移等下拉列表
-    render layout: false
   end
 
   def index_by_student

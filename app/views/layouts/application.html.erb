@@ -38,14 +38,14 @@
             <p class="list-group-item-text">点击这里上传小朋友的照片，这里是所有功能的入口</p>
           </a>
 
-          <a href="<%= url_for klass_students_path(current_user.klass) %>" data-remote="true" id="classify" class="list-group-item">
+          <a href="<%= url_for klass_students_path(current_user.klass) %>" id="classify" class="list-group-item">
             <span class="badge"><%= current_user.klass.students.length %></span>
             <h4 class="list-group-item-heading">照片归类</h4>
             <p class="list-group-item-text">
               说明一下归类是干嘛的
             </p>
           </a>
-          <a href="<%= url_for test_path %>" data-remote="true" class="list-group-item">
+          <a href="#" class="list-group-item">
             <h4 class="list-group-item-heading">排书</h4>
             <p class="list-group-item-text">
               说明一下排书是干嘛的
@@ -72,6 +72,6 @@
     <%= debug(params) if Rails.env.development? %>
   </div>
 </div>
-
+<%= yield :javascript %>
 </body>
 </html>

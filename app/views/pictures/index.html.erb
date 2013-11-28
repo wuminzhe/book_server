@@ -1,0 +1,161 @@
+<% content_for :title do ' - 照片' end %>
+
+<% content_for :javascript do %>
+<script type='text/javascript'>
+  function genereate_upload_widget() {
+    $("#uploader").html('');
+    $("#uploader").pluploadQueue({
+      runtimes: 'html5,flash,silverlight',
+      url: '<%= "http://#{request.host_with_port}/upload" %>',
+      multipart_params: {
+        '<%= request_forgery_protection_token %>': '<%= form_authenticity_token %>',
+        '<%= Rails.application.config.session_options[:key] %>': '<%= request.session_options[:id] %>'
+      },
+      init : {
+        FileUploaded: function(up, file, info) {
+//        console.log('[FileUploaded] File:', file, "Info:", info);
+          var url = eval("("+info.response+")").url;
+          file.url = url;
+        },
+        UploadComplete: function(up, files) {
+          $("#upload_dialog_confirm").attr("disabled", false);
+        }
+      }
+    });
+  }
+
+  genereate_upload_widget();
+
+  $("#open_upload_dialog_button").click(function(){
+    genereate_upload_widget();
+  });
+
+  $("#upload_dialog_confirm").click(function(){
+    var pl = $("#uploader").pluploadQueue();
+
+    if (pl.files.length > 0) {
+      var data = {
+        'urls': [],
+        'activity_id': <%= @activity.id %>
+      };
+      for(var i=0;i<pl.files.length;i++) {
+        var file = pl.files[i];
+        data.urls.push(file.url);
+      }
+      $.post( '<%= "http://#{request.host_with_port}/pictures" %>', data, function() {
+        window.location = "<%= url_for activity_pictures_path(@activity) %>";
+      });
+    }
+    $('#upload_dialog').modal('hide');
+  });
+
+  $("#select_images").click(function(){
+    var thumbnails = $("#main .thumbnail");
+    if( $(this).hasClass("active") ) {
+      $(this).removeClass("active");
+
+      thumbnails.removeClass("selected");
+      thumbnails.click(function(){
+        //alert("hello");
+      });
+    } else {
+      $(this).addClass("active");
+
+      //点击图片
+      thumbnails.click(function(){
+        var thumbnail = $(this);
+        if(thumbnail.hasClass("selected")){
+          thumbnail.removeClass("selected");
+        }else{
+          thumbnail.addClass("selected");
+        }
+      });
+    }
+  });
+
+  $("#move_to_activities_dialog_confirm").click(function(){
+    var dest_activity_id = $("#activities").val();
+    console.log(dest_activity_id);
+    var thumbnails = $("#main .thumbnail.selected");
+    var data = {
+      'picture_ids': [],
+      'src_activity_id': <%= @activity.id %>,
+      'dest_activity_id':dest_activity_id
+    };
+    thumbnails.each(function(i, thumbnail){
+      var id = $(thumbnail).attr("id");
+      data.picture_ids.push(id);
+    });
+
+    $.post( '<%= "http://#{request.host_with_port}/move_to_activity" %>', data, function( result ) {
+      window.location = "<%= url_for activity_pictures_path(@activity) %>";
+    });
+
+    $('#move_to_activities_dialog').modal('hide');
+  });
+
+
+</script>
+<% end %>
+
+<div id="nav_title" class="row">
+  <div class="col-md-6">
+    <ol id="path" class="breadcrumb">
+      <li><a href="<%= url_for klass_activities_path(current_user.klass) %>">所有上传</a></li>
+      <li class="active"><%= @activity.title %></li>
+    </ol>
+  </div>
+  <div id="actions" class="col-md-6">
+    <a href="#" id="open_upload_dialog_button" class="pull-right" data-toggle="modal" data-target="#upload_dialog">上传图片</a>
+    <a href="#" id="move_to_activities" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#move_to_activities_dialog" style="margin-right: 10px">移动图片至...</a>
+    <a href="#" id="" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">复制图片至...</a>
+    <a href="#" id="" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">分配图片给...</a>
+    <a href="#" id="select_images" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">选择</a>
+  </div>
+</div>
+
+<div id="main">
+  <%= render partial: 'pictures', object: @pictures %>
+</div>
+
+<!-- Upload Modal -->
+<div class="modal fade" id="upload_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+      </div>
+      <div class="modal-body" style="padding: 0">
+        <div id="uploader"></div>
+      </div>
+      <div class="modal-footer" style="margin-top: 1px">
+        <button type="button" class="btn btn-default" id="upload_dialog_cancel" data-dismiss="modal">取消</button>
+        <a id="upload_dialog_confirm" href="#" class="btn btn-primary" disabled="true">确定</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Move Modal -->
+<div class="modal fade" id="move_to_activities_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">移动图片至其他事件</h4>
+      </div>
+      <div class="modal-body">
+        <select id="activities" class="form-control">
+          <% @activities.each do |activity| %>
+            <option value="<%= activity.id %>"><%= activity.title %></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="move_to_activities_dialog_cancel" data-dismiss="modal">取消</button>
+        <a id="move_to_activities_dialog_confirm" href="#" class="btn btn-primary">确定</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

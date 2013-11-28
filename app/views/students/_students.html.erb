@@ -1,7 +1,7 @@
 
 <% students.each do |student| %>
   <div class="col-md-2">
-    <a href="<%= url_for student_activities_path(student) %>" data-remote="true" class="thumbnail">
+    <a href="<%= url_for student_activities_path(student) %>" class="thumbnail">
       <img src="<%= student.avatar %>" alt="...">
       <div class="caption" style="text-align: center">
         <h5><%= student.name %></h5>

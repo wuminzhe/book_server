@@ -28,7 +28,14 @@ Book::Application.routes.draw do
   match '/upload', to: 'pictures#upload', via: 'post'
   match '/move_to_activity', to: 'pictures#move_to_activity', via: 'post'
 
-  match '/test', to: 'pictures#test', via: 'get'
+  #flash 界面的接口
+  # front
+  match '/front/pictures', to: 'flash#front_pictures', via: 'get'
+  match '/front/template', to: 'flash#front_template', via: 'get'
+  match '/front/template', to: 'flash#save_front_template', via: 'post'
+  # back
+  match '/back/template', to: 'flash#back_template', via: 'get'
+  match '/back/template', to: 'flash#save_back_template', via: 'post'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

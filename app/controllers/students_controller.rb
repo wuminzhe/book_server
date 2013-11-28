@@ -2,12 +2,10 @@ class StudentsController < ApplicationController
   def index
     klass = Klass.find(params[:klass_id])
     @students = klass.students
-    render layout: false
   end
 
   def activities
     @student = Student.find(params[:student_id])
-    render layout: false
   end
 
   def pictures

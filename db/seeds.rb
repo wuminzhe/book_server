@@ -45,3 +45,10 @@ end
   StudentPictureAssociation.create student: students[1], picture: pictures[i]
 end
 
+Sticker.delete_all
+Sticker.create src: 'http://pic.52mxp.com/site/book/jmf.jpg'
+Sticker.create src: 'http://pic.52mxp.com/site/book/snb.jpg'
+Sticker.create src: 'http://pic.52mxp.com/site/book/atm.jpg'
+
+
+

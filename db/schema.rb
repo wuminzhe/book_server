@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131121084139) do
+ActiveRecord::Schema.define(version: 20131128080437) do
 
   create_table "activities", force: true do |t|
     t.string   "title"
@@ -49,6 +49,12 @@ ActiveRecord::Schema.define(version: 20131121084139) do
     t.integer  "klass_id"
   end
 
+  create_table "stickers", force: true do |t|
+    t.string   "src"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "student_picture_associations", force: true do |t|
     t.integer  "student_id"
     t.integer  "picture_id"
@@ -67,9 +73,16 @@ ActiveRecord::Schema.define(version: 20131121084139) do
     t.datetime "updated_at"
     t.integer  "number"
     t.string   "avatar"
+    t.text     "template"
   end
 
   add_index "students", ["klass_id"], name: "index_students_on_klass_id"
+
+  create_table "templates", force: true do |t|
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "username"
