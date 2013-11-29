@@ -30,12 +30,12 @@ Book::Application.routes.draw do
 
   #flash 界面的接口
   # front
-  match '/front/pictures', to: 'flash#front_pictures', via: 'get'
-  match '/front/template', to: 'flash#front_template', via: 'get'
-  match '/front/template', to: 'flash#save_front_template', via: 'post'
+  match '/front/pictures', to: 'flex#front_pictures', via: 'get'
+  match '/front/template', to: 'flex#front_template', via: 'get'
+  match '/front/template', to: 'flex#save_front_template', via: 'post'
   # back
-  match '/back/template', to: 'flash#back_template', via: 'get'
-  match '/back/template', to: 'flash#save_back_template', via: 'post'
+  match '/back/template', to: 'flex#back_template', via: 'get'
+  match '/back/template', to: 'flex#save_back_template', via: 'post'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
