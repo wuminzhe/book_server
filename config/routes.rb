@@ -27,6 +27,9 @@ Book::Application.routes.draw do
 
   match '/upload', to: 'pictures#upload', via: 'post'
   match '/move_to_activity', to: 'pictures#move_to_activity', via: 'post'
+  match '/copy_to_activity', to: 'pictures#copy_to_activity', via: 'post'
+  match '/remove_from_current_activity', to: 'pictures#remove_from_current_activity', via: 'post'
+  match '/assign_to_students', to: 'pictures#assign_to_students', via: 'post'
 
   #flash 界面的接口
   # front

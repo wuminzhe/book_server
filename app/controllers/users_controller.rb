@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :correct_user_check,   only: [:show]
 
   def show
+    @main_menu_id = 'update_images'
   end
 
   def index

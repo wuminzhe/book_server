@@ -22,7 +22,7 @@ end
 Picture.delete_all
 pictures = []
 21.times do |i|
-  pictures << Picture.create(src: 'http://pic.52mxp.com/site/cat_and_girl.jpg', klass: klass)
+  pictures << Picture.create(src: "http://115.29.170.136:3000/uploads/#{i}.jpg", klass: klass)
 end
 
 ActivityPictureAssociation.delete_all
@@ -46,9 +46,9 @@ end
 end
 
 Sticker.delete_all
-Sticker.create src: 'http://pic.52mxp.com/site/book/jmf.jpg'
-Sticker.create src: 'http://pic.52mxp.com/site/book/snb.jpg'
-Sticker.create src: 'http://pic.52mxp.com/site/book/atm.jpg'
+Sticker.create src: 'http://115.29.170.136:3000/images/stickers/jmf.jpg'
+Sticker.create src: 'http://115.29.170.136:3000/images/stickers/snb.jpg'
+Sticker.create src: 'http://115.29.170.136:3000/images/stickers/atm.jpg'
 
 
 

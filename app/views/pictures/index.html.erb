@@ -13,7 +13,6 @@
       },
       init : {
         FileUploaded: function(up, file, info) {
-//        console.log('[FileUploaded] File:', file, "Info:", info);
           var url = eval("("+info.response+")").url;
           file.url = url;
         },
@@ -73,43 +72,131 @@
     }
   });
 
-  $("#move_to_activities_dialog_confirm").click(function(){
-    var dest_activity_id = $("#activities").val();
-    console.log(dest_activity_id);
+  function get_selected_picture_ids() {
+    var picture_ids = [];
     var thumbnails = $("#main .thumbnail.selected");
-    var data = {
-      'picture_ids': [],
-      'src_activity_id': <%= @activity.id %>,
-      'dest_activity_id':dest_activity_id
-    };
     thumbnails.each(function(i, thumbnail){
       var id = $(thumbnail).attr("id");
-      data.picture_ids.push(id);
+      picture_ids.push(id);
     });
+    return picture_ids.join(',');
+  }
 
-    $.post( '<%= "http://#{request.host_with_port}/move_to_activity" %>', data, function( result ) {
-      window.location = "<%= url_for activity_pictures_path(@activity) %>";
-    });
+  $("#move_to_activities_dialog_confirm").click(function(){
+    // 准备要提交的数据
+    //   目标活动
+    var dest_activity_id = $("#activities").val();
+    //   要移动的图片
+    var picture_ids = get_selected_picture_ids();
 
+    if(picture_ids.length===0) {
+      alert('请选择图片后操作！');
+    } else {
+      // 给表单赋值
+      $("#move_to_activity_form > input[name='dest_activity_id']").val(dest_activity_id);
+      $("#move_to_activity_form > input[name='picture_ids']").val(picture_ids);
+
+      // 表单提交
+      $("#move_to_activity_form").submit();
+    }
+
+    // 隐藏对话框
     $('#move_to_activities_dialog').modal('hide');
   });
+
+  $("#copy_to_activities_dialog_confirm").click(function(){
+    // 准备要提交的数据
+    //   目标活动
+    var dest_activity_ids = [];
+    $('input[name="activity_for_copy').each(function(i){
+      if($(this).prop("checked")){
+        dest_activity_ids.push($(this).val());
+      }
+    });
+    //   要移动的图片
+    var picture_ids = get_selected_picture_ids();
+
+    if(picture_ids.length===0 ) {
+      alert('请选择图片后操作！');
+    } else if(dest_activity_ids.length===0) {
+      alert('请选择目标活动后操作！');
+    } else {
+      // 给表单赋值
+      $("#copy_to_activity_form > input[name='dest_activity_ids']").val(dest_activity_ids.join(","));
+      $("#copy_to_activity_form > input[name='picture_ids']").val(picture_ids);
+
+      // 表单提交
+      $("#copy_to_activity_form").submit();
+    }
+
+    $('#copy_to_activities_dialog').modal('hide');
+  });
+
+  $("#remove_from_current_activity").click(function(){
+
+    // 选择的图片
+    var picture_ids = get_selected_picture_ids();
+
+    if(picture_ids.length===0) {
+      alert('请选择图片后操作！');
+    } else {
+      if(confirm("确定删除？")) {
+        // 给表单赋值
+        $("#remove_from_current_activity_form > input[name='picture_ids']").val(picture_ids);
+
+        // 表单提交
+        $("#remove_from_current_activity_form").submit();
+      }
+
+    }
+
+  });
+
+  $("#assign_to_students_button").click(function(){
+    $("#assign_to_students_dialog").modal('toggle');
+  });
+
+  $("#assign_to_students_dialog_confirm").click(function(){
+    var student_ids = [];
+    $('#assign_to_students_form input:checkbox').each(function(i){
+      if($(this).prop("checked")){
+        student_ids.push($(this).val());
+      }
+    });
+
+    // 选择的图片
+    var picture_ids = get_selected_picture_ids();
+
+    if(picture_ids.length===0) {
+      alert('请选择图片后操作！');
+    } else {
+      // 给表单赋值
+      $("#assign_to_students_form > input[name='student_ids']").val(student_ids.join(","));
+      $("#assign_to_students_form > input[name='picture_ids']").val(picture_ids);
+
+      // 表单提交
+      $("#assign_to_students_form").submit();
+    }
+  });
+
 
 
 </script>
 <% end %>
 
 <div id="nav_title" class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
     <ol id="path" class="breadcrumb">
       <li><a href="<%= url_for klass_activities_path(current_user.klass) %>">所有上传</a></li>
       <li class="active"><%= @activity.title %></li>
     </ol>
   </div>
-  <div id="actions" class="col-md-6">
-    <a href="#" id="open_upload_dialog_button" class="pull-right" data-toggle="modal" data-target="#upload_dialog">上传图片</a>
-    <a href="#" id="move_to_activities" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#move_to_activities_dialog" style="margin-right: 10px">移动图片至...</a>
-    <a href="#" id="" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">复制图片至...</a>
-    <a href="#" id="" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">分配图片给...</a>
+  <div id="actions" class="col-md-8">
+    <a href="#" id="open_upload_dialog_button" class="pull-right" data-toggle="modal" data-target="#upload_dialog">上传</a>
+    <a href="#" id="move_to_activities" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#move_to_activities_dialog" style="margin-right: 10px">移动至...</a>
+    <a href="#" id="" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#copy_to_activities_dialog" style="margin-right: 10px">复制至...</a>
+    <a href="#" id="assign_to_students_button" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">分配给...</a>
+    <a href="#" id="remove_from_current_activity" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">删除</a>
     <a href="#" id="select_images" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">选择</a>
   </div>
 </div>
@@ -141,16 +228,27 @@
 <div class="modal fade" id="move_to_activities_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">移动图片至其他事件</h4>
+        <h4 class="modal-title" id="myModalLabel">移动图片至其他活动</h4>
       </div>
       <div class="modal-body">
-        <select id="activities" class="form-control">
-          <% @activities.each do |activity| %>
-            <option value="<%= activity.id %>"><%= activity.title %></option>
-          <% end %>
-        </select>
+
+        <%= form_tag move_to_activity_path, id: 'move_to_activity_form' do %>
+          <input name="dest_activity_id" type="hidden"/>
+          <input name="src_activity_id" type="hidden" value="<%= @activity.id %>"/>
+          <input name="picture_ids" type="hidden"/>
+          <select id="activities" class="form-control">
+            <% current_user.klass.activities.each do |activity|
+                if activity.id != @activity.id
+            %>
+              <option value="<%= activity.id %>"><%= activity.title %></option>
+             <% end %>
+            <% end %>
+          </select>
+        <% end %>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" id="move_to_activities_dialog_cancel" data-dismiss="modal">取消</button>
@@ -159,3 +257,88 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<!-- Copy Modal -->
+<div class="modal fade" id="copy_to_activities_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">复制图片至其他活动</h4>
+      </div>
+      <div class="modal-body">
+
+        <%= form_tag copy_to_activity_path, id: 'copy_to_activity_form' do %>
+          <input name="dest_activity_ids" type="hidden"/>
+          <input name="src_activity_id" type="hidden" value="<%= @activity.id %>"/>
+          <input name="picture_ids" type="hidden"/>
+          <%
+             current_user.klass.activities.each do |activity|
+              if activity.id != @activity.id
+          %>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="<%= activity.id %>" name="activity_for_copy">
+                <%= activity.title %>
+              </label>
+            </div>
+          <%  end
+             end %>
+        <% end %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="copy_to_activities_dialog_cancel" data-dismiss="modal">取消</button>
+        <a id="copy_to_activities_dialog_confirm" href="#" class="btn btn-primary">确定</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Assign Modal -->
+<div class="modal fade" id="assign_to_students_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">分配图片给学生</h4>
+      </div>
+      <div class="modal-body">
+
+        <%= form_tag assign_to_students_path, id: 'assign_to_students_form' do %>
+          <input name="current_activity_id" type="hidden" value="<%= @activity.id %>"/>
+          <input name="picture_ids" type="hidden"/>
+          <input name="student_ids" type="hidden"/>
+
+          <% students_group = group(current_user.klass.students, 4) %>
+          <% students_group.each do |g| %>
+            <div class="row">
+              <% g.each do |student| %>
+              <div class="col-md-3">
+                <div class="checkbox pull-left" style="">
+                  <label>
+                    <input type="checkbox" value="<%= student.id %>">
+                    <%= student.name %>
+                  </label>
+                </div>
+              </div>
+              <% end %>
+            </div>
+
+          <% end %>
+        <% end %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="assign_to_students_dialog_cancel" data-dismiss="modal">取消</button>
+        <a id="assign_to_students_dialog_confirm" href="#" class="btn btn-primary">确定</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- 从当前活动中删除图片的表单 -->
+<%= form_tag remove_from_current_activity_path, id: 'remove_from_current_activity_form' do %>
+  <input name="src_activity_id" type="hidden" value="<%= @activity.id %>"/>
+  <input name="picture_ids" type="hidden"/>
+<% end %>

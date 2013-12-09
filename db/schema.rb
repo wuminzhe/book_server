@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131128080437) do
+ActiveRecord::Schema.define(version: 20131129061657) do
 
   create_table "activities", force: true do |t|
     t.string   "title"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 20131128080437) do
     t.integer  "grade"
     t.integer  "number"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "photo_books", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "template_id"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -73,7 +81,6 @@ ActiveRecord::Schema.define(version: 20131128080437) do
     t.datetime "updated_at"
     t.integer  "number"
     t.string   "avatar"
-    t.text     "template"
   end
 
   add_index "students", ["klass_id"], name: "index_students_on_klass_id"

@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap/modal
+//= require bootstrap
+//= require bootstrap-multiselect
 
 ////////////////////
 // plupload
@@ -30,10 +31,5 @@
 //= require jquery.plupload.queue
 
 $(document).ready(function() {
-
-  $("#operations > a.list-group-item").click(function(){
-    $("#operations > a.list-group-item").removeClass("active");
-    $(this).addClass("active");
-  });
 
 });
