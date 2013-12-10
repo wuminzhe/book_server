@@ -22,12 +22,7 @@ end
 Picture.delete_all
 pictures = []
 21.times do |i|
-  pictures << Picture.create(src: "http://115.29.170.136:3000/uploads/#{i}.jpg", klass: klass)
-end
-
-ActivityPictureAssociation.delete_all
-21.times do |i|
-  ActivityPictureAssociation.create activity: activities[1], picture: pictures[i]
+  pictures << Picture.create(src: "http://115.29.170.136:3000/uploads/#{i}.jpg", klass: klass, activity: activities[1])
 end
 
 Student.delete_all
@@ -38,11 +33,13 @@ students = []
 end
 
 StudentPictureAssociation.delete_all
-9.times do |i|
-  StudentPictureAssociation.create student: students[0], picture: pictures[i]
-end
-12.times do |i|
-  StudentPictureAssociation.create student: students[1], picture: pictures[i]
+21.times do |i|
+  if i <= 9
+    StudentPictureAssociation.create student: students[0], picture: pictures[i]
+  else
+    StudentPictureAssociation.create student: students[1], picture: pictures[i]
+  end
+
 end
 
 Sticker.delete_all

@@ -1,17 +1,36 @@
-<% content_for :title do " - #{@student.name}的#{@activity.title}的照片" end %>
+<% content_for :title do " - #{@student.name}的照片" end %>
 
 <div id="nav_title" class="row">
   <div class="col-md-6">
     <ol id="path" class="breadcrumb">
-      <li><a href="<%= url_for klass_students_path(@student.klass) %>" data-remote="true">所有学生</a></li>
-      <li><a href="<%= url_for student_activities_path(@student) %>" data-remote="true"><%= @student.name %></a></li>
-      <li class="active"><%= @activity.title %></li>
+      <li><a href="<%= url_for klass_students_path(@student.klass) %>">所有学生</a></li>
+      <li><%= @student.name %></li>
     </ol>
   </div>
   <div id="actions" class="col-md-6">
   </div>
 </div>
 
-<div id="main">
-  <%= render partial: 'pictures', object: @pictures %>
-</div>
+
+<% @student.klass.activities.each do |activity| %>
+  <div class="pull-right">
+    <a href="#" class="btn btn-default btn-xs" style="margin-right: 10px">选择</a>
+    <a href="#" class="btn btn-default btn-xs" style="margin-right: 10px">删除</a>
+    <a href="#" class="btn btn-default btn-xs" style="margin-right: 10px">移动</a>
+  </div>
+  <h5 style="padding-bottom: 10px;"><%= activity.title %></h5>
+
+  <% group(@student.pictures_by_activity(activity), 6).each do |g| %>
+    <div class="row">
+      <% g.each do |picture| %>
+        <div class="col-md-2">
+          <a href="#" class="thumbnail">
+            <img src="<%= picture.src %>" alt="...">
+          </a>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+

@@ -1,12 +1,14 @@
 
-<% students.each do |student| %>
-  <div class="col-md-2">
-    <a href="<%= url_for student_activities_path(student) %>" class="thumbnail">
-      <img src="<%= student.avatar %>" alt="...">
-      <div class="caption" style="text-align: center">
-        <h5><%= student.name %></h5>
-      </div>
-      <span class="badge" style="color:graytext;border:1px solid graytext;background-color:yellow;position:absolute;top: -5px;right: -5px"><%= student.pictures.length() %></span>
-    </a>
-  </div>
-<% end %>
+<div class="row">
+  <% students.each do |student| %>
+    <div class="col-md-2">
+      <a href="<%= url_for students_pictures_path(student) %>" class="thumbnail">
+        <img src="<%= student.avatar %>" alt="...">
+        <div class="caption" style="text-align: center">
+          <h5><%= student.name %></h5>
+        </div>
+        <span class="badge" style="color:graytext;border:1px solid graytext;background-color:yellow;position:absolute;top: -5px;right: -5px"><%= student.pictures.length() %></span>
+      </a>
+    </div>
+  <% end %>
+</div>

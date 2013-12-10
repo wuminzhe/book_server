@@ -1,17 +1,11 @@
-<%
-   pictures = []
-   @pictures.each do |picture|
-     pictures << picture
-     if pictures.length == 6
-%>
-       <%= render :partial => 'row', :locals => { pictures: pictures } %>
-<%
-       pictures = []
-     end
-   end
-   if pictures.length > 0
-%>
-     <%= render :partial => 'row', :locals => { pictures: pictures } %>
-<%
-   end
-%>
+<% group(@pictures, 6).each do |g| %>
+  <div class="row">
+    <% g.each do |picture| %>
+      <div class="col-md-2">
+        <a href="###" class="thumbnail" id="<%= picture.id %>">
+          <img src="<%= picture.src %>" alt="...">
+        </a>
+      </div>
+    <% end %>
+  </div>
+<% end %>

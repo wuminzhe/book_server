@@ -22,8 +22,8 @@ Book::Application.routes.draw do
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'get'
 
-  match '/students/:student_id/activities', to: 'students#activities', via: 'get', as: 'student_activities'
-  match '/students/:student_id/activities/:activity_id', to: 'students#pictures', via: 'get', as: 'student_activity_pictures'
+  # 学生的图片（按活动分类）
+  match '/students/:student_id/pictures', to: 'students#pictures', via: 'get', as: 'students_pictures'
 
   match '/upload', to: 'pictures#upload', via: 'post'
   match '/move_to_activity', to: 'pictures#move_to_activity', via: 'post'

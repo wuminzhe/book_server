@@ -25,7 +25,7 @@
 
   genereate_upload_widget();
 
-  $("#open_upload_dialog_button").click(function(){
+  $("#open_upload_dialog").click(function(){
     genereate_upload_widget();
   });
 
@@ -152,9 +152,25 @@
 
   });
 
-  $("#assign_to_students_button").click(function(){
-    $("#assign_to_students_dialog").modal('toggle');
+  $.each([
+    "open_copy_to_activities_dialog",
+    "open_move_to_activities_dialog",
+    "open_assign_to_students_dialog"
+  ], function(index, value){
+    $("#"+value).click(function(){
+      // 选择的图片
+      var picture_ids = get_selected_picture_ids();
+
+      if(picture_ids.length===0) {
+        alert('请选择图片后操作！');
+      }else{
+        var dialog_id = $(this).attr("id").substring(5);
+        $("#"+dialog_id).modal('show');
+      }
+
+    });
   });
+
 
   $("#assign_to_students_dialog_confirm").click(function(){
     var student_ids = [];
@@ -192,18 +208,16 @@
     </ol>
   </div>
   <div id="actions" class="col-md-8">
-    <a href="#" id="open_upload_dialog_button" class="pull-right" data-toggle="modal" data-target="#upload_dialog">上传</a>
-    <a href="#" id="move_to_activities" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#move_to_activities_dialog" style="margin-right: 10px">移动至...</a>
-    <a href="#" id="" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#copy_to_activities_dialog" style="margin-right: 10px">复制至...</a>
-    <a href="#" id="assign_to_students_button" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">分配给...</a>
+    <a href="#" id="open_upload_dialog" class="btn btn-default btn-xs pull-right">上传</a>
+    <a href="#" id="open_move_to_activities_dialog" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">移动至...</a>
+    <a href="#" id="open_copy_to_activities_dialog" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">复制至...</a>
+    <a href="#" id="open_assign_to_students_dialog" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">分配给...</a>
     <a href="#" id="remove_from_current_activity" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">删除</a>
     <a href="#" id="select_images" class="btn btn-default btn-xs pull-right" style="margin-right: 10px">选择</a>
   </div>
 </div>
 
-<div id="main">
-  <%= render partial: 'pictures', object: @pictures %>
-</div>
+<%= render partial: 'pictures', object: @pictures %>
 
 <!-- Upload Modal -->
 <div class="modal fade" id="upload_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

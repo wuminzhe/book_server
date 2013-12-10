@@ -1,13 +1,14 @@
 
-<% activities.each do |activity| %>
-  <div class="col-md-2">
-    <a href="<%= url_for activity_pictures_path(activity) %>" class="thumbnail">
-      <img src="http://pic.52mxp.com/site/text.png" alt="...">
-      <div class="caption" style="text-align: center">
-        <h5><%= activity.title %></h5>
-      </div>
-      <span class="badge" style="color:graytext;border:1px solid graytext;background-color:yellow;position:absolute;top: -5px;right: -5px"><%= activity.pictures.length()  %></span>
-    </a>
-  </div>
-<% end %>
-
+<div class="row">
+  <% activities.each do |activity| %>
+    <div class="col-md-2">
+      <a href="<%= url_for activity_pictures_path(activity) %>" class="thumbnail">
+        <img src="http://pic.52mxp.com/site/text.png" alt="...">
+        <div class="caption" style="text-align: center">
+          <h5><%= activity.title %></h5>
+        </div>
+        <span class="badge" style="color:graytext;border:1px solid graytext;background-color:yellow;position:absolute;top: -5px;right: -5px"><%= activity.pictures.length()  %></span>
+      </a>
+    </div>
+  <% end %>
+</div>

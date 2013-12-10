@@ -21,16 +21,6 @@ ActiveRecord::Schema.define(version: 20131129061657) do
     t.integer  "year"
   end
 
-  create_table "activity_picture_associations", force: true do |t|
-    t.integer  "activity_id"
-    t.integer  "picture_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "activity_picture_associations", ["activity_id"], name: "index_activity_picture_associations_on_activity_id"
-  add_index "activity_picture_associations", ["picture_id"], name: "index_activity_picture_associations_on_picture_id"
-
   create_table "klasses", force: true do |t|
     t.string   "name"
     t.integer  "grade"
@@ -51,11 +41,14 @@ ActiveRecord::Schema.define(version: 20131129061657) do
   create_table "pictures", force: true do |t|
     t.string   "year"
     t.integer  "used"
+    t.integer  "activity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "src"
     t.integer  "klass_id"
   end
+
+  add_index "pictures", ["activity_id"], name: "index_pictures_on_activity_id"
 
   create_table "stickers", force: true do |t|
     t.string   "src"

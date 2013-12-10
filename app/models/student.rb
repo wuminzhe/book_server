@@ -8,7 +8,7 @@ class Student < ActiveRecord::Base
   def pictures_by_activity(activity)
     pics = []
     pictures.each do |picture|
-      if picture.activities.include? activity
+      if picture.activity == activity
         pics << picture
       end
     end
