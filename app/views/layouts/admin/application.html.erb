@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>登陆</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<%= image_url 'icons/apple-touch-icon-144-precomposed.png' %>">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= image_url 'icons/apple-touch-icon-114-precomposed.png' %>">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= image_url 'icons/apple-touch-icon-72-precomposed.png' %>">
+  <link rel="apple-touch-icon-precomposed" href="<%= image_url 'icons/apple-touch-icon-57-precomposed.png' %>">
+  <link rel="shortcut icon" href="<%= image_url 'icons/favicon.png' %>">
+
+  <!-- AgileUI CSS Core and Theme UI and AgileUI Animations -->
+  <%= stylesheet_link_tag "admin/aui" %>
+  <!-- <link rel="stylesheet" type="text/css" href="../_assets/css/widgets/theme-switcher.css"> -->
+
+  <!-- AgileUI JS -->
+  <%= javascript_include_tag "admin/aui" %>
+
+</head>
+<body class="fixed-sidebar fixed-header">
+
+
+<div id="loading" class="ui-front loader ui-widget-overlay bg-white opacity-100">
+  <img src="assets/images/loader-dark.gif" alt="">
+</div>
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to
+  improve your experience.</p>
+<![endif]-->
+
+<div id="page-wrapper" class="demo-example">
+
+  <!-- 侧边栏 -->
+  <div id="page-sidebar">
+    <div id="header-logo">
+      photokis <i class="opacity-80"></i>
+
+      <a href="javascript:;" class="tooltip-button" data-placement="bottom" title="Close sidebar" id="close-sidebar">
+        <i class="glyph-icon icon-align-justify"></i>
+      </a>
+      <a href="javascript:;" class="tooltip-button hidden" data-placement="bottom" title="Open sidebar" id="rm-close-sidebar">
+        <i class="glyph-icon icon-align-justify"></i>
+      </a>
+      <a href="javascript:;" class="tooltip-button hidden" title="Navigation Menu" id="responsive-open-menu">
+        <i class="glyph-icon icon-align-justify"></i>
+      </a>
+    </div>
+    <div id="sidebar-search">
+      <input type="text" placeholder="search..." class="autocomplete-input tooltip-button" data-placement="right" title="Type &apos;j&apos; to see the available tags..." id="" name="">
+      <i class="glyph-icon icon-search"></i>
+    </div>
+    <div id="sidebar-menu" class="scrollable-content">
+    <ul>
+    <li>
+      <a href="index.html" title="Dashboard">
+        <i class="glyph-icon icon-dashboard"></i>
+        主面板
+      </a>
+    </li>
+    <li class="active">
+      <a href="javascript:;" title="业务管理">
+        <i class="glyph-icon icon-table"></i>
+        业务管理
+      </a>
+      <ul>
+        <li>
+          <a href="grid.html" title="Grid Layouts">
+            <i class="glyph-icon icon-chevron-right"></i>
+            老师
+          </a>
+        </li>
+        <li>
+          <a href="helper_classes.html" title="Helpers">
+            <i class="glyph-icon icon-chevron-right"></i>
+            班级
+          </a>
+        </li>
+        <li>
+          <a href="timeline.html" title="Timeline">
+            <i class="glyph-icon icon-chevron-right"></i>
+            学生
+          </a>
+        </li>
+        <li>
+          <a href="dashboard_panels.html" title="Dashboard panels">
+            <i class="glyph-icon icon-chevron-right"></i>
+            模板
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="active">
+      <a href="javascript:;" title="统计分析">
+        <i class="glyph-icon icon-bar-chart-o"></i>
+        统计分析
+      </a>
+      <ul>
+        <li>
+          <a href="login.html" title="综合统计">
+            <i class="glyph-icon icon-chevron-right"></i>
+            综合统计
+          </a>
+        </li>
+        <li>
+          <a href="login-alt.html" title="制作量统计">
+            <i class="glyph-icon icon-chevron-right"></i>
+            制作量统计
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="javascript:;" title="其他">
+        <i class="glyph-icon icon-folder-open"></i>
+        其他
+        <span class="badge primary-bg radius-all-100">19</span>
+      </a>
+      <ul>
+        <li>
+          <a href="tabs.html" title="其他1">
+            <i class="glyph-icon icon-chevron-right"></i>
+            其他1
+          </a>
+        </li>
+        <li>
+          <a href="accordions.html" title="其他2">
+            <i class="glyph-icon icon-chevron-right"></i>
+            其他2
+          </a>
+        </li>
+        <li>
+          <a href="datepicker.html" title="其他3">
+            <i class="glyph-icon icon-chevron-right"></i>
+            其他3
+          </a>
+        </li>
+        <li>
+          <a href="timepicker.html" title="其他4">
+            <i class="glyph-icon icon-chevron-right"></i>
+            其他4
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    </ul>
+    <div class="divider mrg5T mobile-hidden"></div>
+    <div class="text-center mobile-hidden">
+      <div class="button-group">
+        <a href="javascript:;" class="btn medium ui-state-default tooltip-button" data-placement="top" title="Top tooltip">
+          <i class="glyph-icon icon-flag"></i>
+        </a>
+        <a href="javascript:;" class="btn medium ui-state-default tooltip-button" data-placement="bottom" title="Bottom tooltip">
+          <i class="glyph-icon icon-inbox"></i>
+        </a>
+        <a href="javascript:;" class="btn medium ui-state-default tooltip-button" data-placement="right" title="Right tooltip">
+          <i class="glyph-icon icon-hdd-o"></i>
+        </a>
+      </div>
+
+    </div>
+    </div>
+
+  </div>
+  <!-- #page-sidebar -->
+
+  <!-- 内容栏 -->
+  <div id="page-main">
+
+    <div id="page-main-wrapper">
+
+      <div id="page-header" class="clearfix">
+        <div id="page-header-wrapper" class="clearfix">
+
+        <div class="top-icon-bar dropdown">
+          <a href="javascript:;" title="" class="user-ico clearfix" data-toggle="dropdown">
+            <span>admin</span>
+            <i class="glyph-icon icon-chevron-down"></i>
+          </a>
+          <ul class="dropdown-menu float-right">
+            <li>
+              <span class="badge badge-absolute float-left radius-all-100 mrg5R bg-green tooltip-button" title="" data-original-title="You can add badges even to dropdown menus!">7</span>
+              <a href="javascript:;" title="">
+                <i class="glyph-icon icon-user mrg5R"></i>
+                Account Details
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;" title="">
+                <i class="glyph-icon icon-cog mrg5R"></i>
+                Edit Profile
+              </a>
+            </li>
+            <li>
+              <a class="font-orange" href="javascript:;" title="">
+                <i class="glyph-icon icon-flag mrg5R"></i>
+                Notifications
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;" title="">
+                <i class="glyph-icon icon-signout font-size-13 mrg5R"></i>
+                <span class="font-bold">Logout</span>
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li class="dropdown-submenu float-left">
+              <a href="javascript:;" data-toggle="dropdown" title="">
+                Dropdown menu
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="javascript:;" title="">
+                    Submenu 1
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:;" title="">
+                    Submenu 2
+                  </a>
+                </li>
+                <li class="dropdown-submenu">
+                  <a href="javascript:;" title="">
+                    Submenu 3
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="javascript:;" title="">
+                        Submenu 2-1
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript:;" title="">
+                        Submenu 2-2
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="javascript:;" title="">
+                Another menu item
+              </a>
+            </li>
+
+          </ul>
+        </div>
+        <div class="top-icon-bar">
+        <a href="javascript:;" class="popover-button" data-placement="bottom" title="Messages Widget" data-id="#msg-box">
+          <span class="badge badge-absolute bg-orange">18</span>
+          <i class="glyph-icon icon-envelope-o"></i>
+        </a>
+
+        <div id="msg-box" class="hide">
+
+          <div class="scrollable-content scrollable-small">
+
+            <ul class="no-border messages-box">
+              <li>
+                <div class="messages-img">
+                  <img width="32" src="assets/images/gravatar.jpg" alt="">
+                </div>
+                <div class="messages-content">
+                  <div class="messages-title">
+                    <i class="glyph-icon icon-warning-sign font-red"></i>
+                    <a href="javascript:;" title="Message title">Important message</a>
+
+                    <div class="messages-time">
+                      3 hr ago
+                      <span class="glyph-icon icon-time"></span>
+                    </div>
+                  </div>
+                  <div class="messages-text">
+                    This message must be read immediately because of it's high importance...
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="messages-img">
+                  <img width="32" src="assets/images/gravatar.jpg" alt="">
+                </div>
+                <div class="messages-content">
+                  <div class="messages-title">
+                    <i class="glyph-icon icon-tag font-blue"></i>
+                    <a href="javascript:;" title="Message title">Some random email</a>
+
+                    <div class="messages-time">
+                      3 hr ago
+                      <span class="glyph-icon icon-time"></span>
+                    </div>
+                  </div>
+                  <div class="messages-text">
+                    This message must be read immediately because of it's high importance...
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="messages-img">
+                  <img width="32" src="assets/images/gravatar.jpg" alt="">
+                </div>
+                <div class="messages-content">
+                  <div class="messages-title">
+                    <a href="javascript:;" class="font-orange" title="Message title">Another received message</a>
+
+                    <div class="messages-time">
+                      3 hr ago
+                      <span class="glyph-icon icon-time"></span>
+                    </div>
+                  </div>
+                  <div class="messages-text">
+                    This message must be read immediately because of it's high importance...
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="messages-img">
+                  <img width="32" src="assets/images/gravatar.jpg" alt="">
+                </div>
+                <div class="messages-content">
+                  <div class="messages-title">
+                    <i class="glyph-icon icon-warning-sign font-red"></i>
+                    <a href="javascript:;" title="Message title">Important message</a>
+
+                    <div class="messages-time">
+                      3 hr ago
+                      <span class="glyph-icon icon-time"></span>
+                    </div>
+                  </div>
+                  <div class="messages-text">
+                    This message must be read immediately because of it's high importance...
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="messages-img">
+                  <img width="32" src="assets/images/gravatar.jpg" alt="">
+                </div>
+                <div class="messages-content">
+                  <div class="messages-title">
+                    <i class="glyph-icon icon-tag font-blue"></i>
+                    <a href="javascript:;" title="Message title">Some random email</a>
+
+                    <div class="messages-time">
+                      3 hr ago
+                      <span class="glyph-icon icon-time"></span>
+                    </div>
+                  </div>
+                  <div class="messages-text">
+                    This message must be read immediately because of it's high importance...
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="messages-img">
+                  <img width="32" src="assets/images/gravatar.jpg" alt="">
+                </div>
+                <div class="messages-content">
+                  <div class="messages-title">
+                    <a href="javascript:;" class="font-orange" title="Message title">Another received message</a>
+
+                    <div class="messages-time">
+                      3 hr ago
+                      <span class="glyph-icon icon-time"></span>
+                    </div>
+                  </div>
+                  <div class="messages-text">
+                    This message must be read immediately because of it's high importance...
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+          </div>
+          <div class="pad10A button-pane button-pane-alt">
+            <a href="messaging.html" class="btn small float-left bg-gray">
+              <span class="button-content text-transform-upr font-size-11">All messages</span>
+            </a>
+
+            <div class="button-group float-right">
+              <a href="javascript:;" class="btn small primary-bg">
+                <i class="glyph-icon icon-star"></i>
+              </a>
+              <a href="javascript:;" class="btn small primary-bg">
+                <i class="glyph-icon icon-random"></i>
+              </a>
+              <a href="javascript:;" class="btn small primary-bg">
+                <i class="glyph-icon icon-map-marker"></i>
+              </a>
+            </div>
+            <a href="javascript:;" class="small btn bg-red float-right mrg10R tooltip-button" data-placement="left" title="Remove comment">
+              <i class="glyph-icon icon-remove"></i>
+            </a>
+          </div>
+
+        </div>
+
+        <a href="javascript:;" class="popover-button" data-placement="bottom" title="" data-id="#notif-box">
+          <span class="badge badge-absolute bg-green">5</span>
+          <i class="glyph-icon icon-bell-o"></i>
+        </a>
+
+        <div id="notif-box" class="hide">
+
+          <div class="popover-title display-block clearfix form-row pad10A">
+            <div class="form-input">
+              <div class="form-input-icon">
+                <i class="glyph-icon icon-search transparent"></i>
+                <input type="text" placeholder="Search notifications..." class="radius-all-100" name="" id="">
+              </div>
+            </div>
+          </div>
+          <div class="scrollable-content scrollable-small">
+
+            <ul class="no-border notifications-box">
+              <li>
+                <span class="btn bg-red icon-notification glyph-icon icon-user"></span>
+                <span class="notification-text">This is an error notification</span>
+
+                <div class="notification-time">
+                  a few seconds ago
+                  <span class="glyph-icon icon-time"></span>
+                </div>
+              </li>
+              <li>
+                <span class="btn bg-orange icon-notification glyph-icon icon-user"></span>
+                <span class="notification-text">This is a warning notification</span>
+
+                <div class="notification-time">
+                  <b>15</b> minutes ago
+                  <span class="glyph-icon icon-time"></span>
+                </div>
+              </li>
+              <li>
+                <span class="bg-green btn icon-notification glyph-icon icon-user"></span>
+                <span class="notification-text font-green font-bold">A success message example.</span>
+
+                <div class="notification-time">
+                  <b>2 hours</b> ago
+                  <span class="glyph-icon icon-time"></span>
+                </div>
+              </li>
+              <li>
+                <span class="btn bg-red icon-notification glyph-icon icon-user"></span>
+                <span class="notification-text">This is an error notification</span>
+
+                <div class="notification-time">
+                  a few seconds ago
+                  <span class="glyph-icon icon-time"></span>
+                </div>
+              </li>
+              <li>
+                <span class="btn bg-orange icon-notification glyph-icon icon-user"></span>
+                <span class="notification-text">This is a warning notification</span>
+
+                <div class="notification-time">
+                  <b>15</b> minutes ago
+                  <span class="glyph-icon icon-time"></span>
+                </div>
+              </li>
+              <li>
+                <span class="bg-blue btn icon-notification glyph-icon icon-user"></span>
+                <span class="notification-text font-blue">Alternate notification styling.</span>
+
+                <div class="notification-time">
+                  <b>2 hours</b> ago
+                  <span class="glyph-icon icon-time"></span>
+                </div>
+              </li>
+            </ul>
+
+          </div>
+          <div class="pad10A button-pane button-pane-alt text-center">
+            <a href="notifications.html" class="btn medium ui-state-default">
+              <span class="button-content">View all notifications</span>
+            </a>
+          </div>
+
+        </div>
+
+        <a href="javascript:;" class="popover-button" data-placement="bottom" title="" data-id="#prog-box">
+          <span class="badge badge-absolute bg-red">21</span>
+          <i class="glyph-icon icon-tasks"></i>
+        </a>
+
+        <div id="prog-box" class="hide">
+
+          <div class="scrollable-content scrollable-small">
+
+            <ul class="no-border progress-box">
+              <li>
+                <div class="progress-title">
+                  Finishing uploading files
+                  <b>23%</b>
+                </div>
+                <div class="progressbar-small progressbar" data-value="23">
+                  <div class="progressbar-value bg-blue">
+                    <div class="progressbar-overlay"></div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="progress-title">
+                  Roadmap progress
+                  <b>91%</b>
+                </div>
+                <div class="progressbar-small progressbar" data-value="91">
+                  <div class="progressbar-value primary-bg">
+                    <div class="progressbar-overlay"></div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="progress-title">
+                  Images upload
+                  <b>58%</b>
+                </div>
+                <div class="progressbar-small progressbar" data-value="58">
+                  <div class="progressbar-value bg-green"></div>
+                </div>
+              </li>
+              <li>
+                <div class="progress-title">
+                  WordPress migration
+                  <b>74%</b>
+                </div>
+                <div class="progressbar-small progressbar" data-value="74">
+                  <div class="progressbar-value bg-red"></div>
+                </div>
+              </li>
+              <li>
+                <div class="progress-title">
+                  Agile development procedures
+                  <b>91%</b>
+                </div>
+                <div class="progressbar-small progressbar" data-value="91">
+                  <div class="progressbar-value primary-bg">
+                    <div class="progressbar-overlay"></div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="progress-title">
+                  Systems integration
+                  <b>58%</b>
+                </div>
+                <div class="progressbar-small progressbar" data-value="58">
+                  <div class="progressbar-value bg-green"></div>
+                </div>
+              </li>
+              <li>
+                <div class="progress-title">
+                  Code optimizations
+                  <b>97%</b>
+                </div>
+                <div class="progressbar-small progressbar" data-value="97">
+                  <div class="progressbar-value bg-orange"></div>
+                </div>
+              </li>
+            </ul>
+
+          </div>
+          <div class="pad10A button-pane button-pane-alt text-center">
+            <a href="notifications.html" class="btn medium ui-state-default">
+              <span class="button-content">View all</span>
+            </a>
+          </div>
+
+        </div>
+        </div>
+
+        </div>
+      </div>
+      <!-- #page-header -->
+
+      <%= yield %>
+
+    </div>
+    <!-- #page-main-wrapper -->
+
+  </div>
+  <!-- #page-main -->
+
+</div>
+<!-- #page-wrapper -->
+
+</body>
+</html>
+

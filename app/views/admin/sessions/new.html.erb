@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>登陆</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<%= image_url 'icons/apple-touch-icon-144-precomposed.png' %>">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= image_url 'icons/apple-touch-icon-114-precomposed.png' %>">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= image_url 'icons/apple-touch-icon-72-precomposed.png' %>">
+  <link rel="apple-touch-icon-precomposed" href="<%= image_url 'icons/apple-touch-icon-57-precomposed.png' %>">
+  <link rel="shortcut icon" href="<%= image_url 'icons/favicon.png' %>">
+
+  <!-- AgileUI CSS Core and Theme UI and AgileUI Animations -->
+  <%= stylesheet_link_tag "admin/aui" %>
+  <!-- <link rel="stylesheet" type="text/css" href="../_assets/css/widgets/theme-switcher.css"> -->
+
+  <!-- AgileUI JS -->
+  <%= javascript_include_tag "admin/aui" %>
+
+</head>
+<body>
+
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to
+  improve your experience.</p>
+<![endif]-->
+
+<div class="pad20A" >
+
+  <div class="row" style="padding-top: 80px;">
+
+
+    <div class="clear"></div>
+
+    <%= form_for(:session, url: admin_sessions_path, html: { class: 'col-md-3 center-margin form-vertical mrg25T' } ) do |f| %>
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+
+      <div id="login-form" class="content-box drop-shadow">
+
+        <div class="content-box-wrapper pad20A pad0B">
+          <div class="form-row">
+            <div class="form-label col-md-2">
+              <label for="session_username">
+                用户名:
+              </label>
+            </div>
+            <div class="form-input col-md-10">
+              <div>
+                <%= f.text_field :username, class: 'form-control', placeholder: '用户名' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-label col-md-2">
+              <label for="session_password">
+                密码:
+              </label>
+            </div>
+            <div class="form-input col-md-10">
+              <div>
+                <%= f.text_field :password, class: 'form-control', placeholder: '密码' %>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-checkbox-radio col-md-6">
+              <%= f.check_box :remember_password, { class: 'custom-checkbox' }, 'yes', 'no' %>
+              <label for="remember_password" class="pad5L">记住密码</label>
+            </div>
+          </div>
+        </div>
+        <div class="button-pane">
+          <button type="submit" class="btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4" id="demo-form-valid" title="Validate!">
+            <span class="button-content">
+                登陆
+            </span>
+          </button>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+
+</div>
+
+
+<div id="page-footer-wrapper" class="login-footer">
+  <div id="page-footer">
+    Copyright &copy; 2013 - 嘻嘻嘻网络有限公司
+  </div>
+</div>
+<!-- #page-footer-wrapper -->
+
+</body>
+</html>

@@ -47,5 +47,10 @@ Sticker.create src: 'http://115.29.170.136:3000/images/stickers/jmf.jpg'
 Sticker.create src: 'http://115.29.170.136:3000/images/stickers/snb.jpg'
 Sticker.create src: 'http://115.29.170.136:3000/images/stickers/atm.jpg'
 
+Administrator.delete_all
+Administrator.create( username: 'admin', password: '123456', password_confirmation: '123456')
+
+
+
 
 

@@ -1,4 +1,5 @@
 Book::Application.routes.draw do
+  get "administrators/show"
   get "pictures/index"
   get "activities/index"
   get "klasses/show"
@@ -39,6 +40,17 @@ Book::Application.routes.draw do
   # back
   match '/back/template', to: 'flex#back_template', via: 'get'
   match '/back/template', to: 'flex#save_back_template', via: 'post'
+
+
+  namespace :admin do
+    get '', to: 'sessions#new', as: '/'
+    resources :sessions, only: [:new, :create, :destroy]
+    resources :administrators, only: [:show]
+    get '/signin', to: 'sessions#new'
+    get '/signout', to: 'sessions#destroy'
+    get '/dashboard', to: 'dashboard#index'
+    get '/teachers', to: 'teachers#index'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

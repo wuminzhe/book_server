@@ -98,7 +98,7 @@ class PicturesController < ApplicationController
     urls = params[:urls]
     activity = Activity.find params[:activity_id]
     urls.each do |url|
-      Picture.create(src: url, klass: current_user.klass, used: 0, activities: [activity])
+      Picture.create(src: url, klass: current_user.klass, used: 0, activity: activity)
     end
 
     render json: { result: 1 }
