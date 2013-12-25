@@ -199,3 +199,29 @@
     errno:
         404: 管理员不存在
         405: 模板内容不合法      
+        
+#### GET /back/frames
+
+保存模板
+
+输入：无
+
+输出：
+
+正常返回：
+
+    {
+        "status": 1,
+        "data": [
+			{
+				"id": 5,
+				"src": "http://pic.52mxp.com/book/mask1.png"
+			}
+		]
+    }
+    
+异常返回：
+
+    {
+        "status": 0
+    }

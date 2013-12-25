@@ -1,0 +1,168 @@
+<%= stylesheet_link_tag 'admin/klasses' %>
+
+<% content_for :javascript do %>
+  <script type='text/javascript'>
+    $(document).ready(function(){
+
+      // 班级折叠
+      $('.klass-name').click(function(){
+        var $klass = $(this).parents('.klass');
+        var $students = $klass.find('.students');
+        if($students.is( ":hidden" )) {
+          $students.slideDown();
+          $klass.addClass('mrg20B');
+        }else{
+          $students.slideUp();
+          $klass.removeClass('mrg20B');
+        }
+      });
+
+      // // 学生的下拉菜单隐藏显示
+      // $('.student .name > i').hide();
+      // $('.student').mouseover(function(){
+      //   $(this).find('.name > i').show();
+      // });
+      // $('.student').mouseout(function(){
+      //   $(this).find('.name > i).hide();
+      // });
+
+    });
+  </script>
+<% end %>
+
+<div id="page-breadcrumb-wrapper">
+  <div id="page-breadcrumb">
+    <a href="javascript:;" title="Dashboard">
+      <i class="glyph-icon icon-table"></i>
+      业务管理
+    </a>
+    <span class="current">
+        班级
+    </span>
+  </div>
+</div>
+
+<!-- #page-breadcrumb-wrapper -->
+<div id="page-content">
+
+  <form action="<%= admin_klasses_path %>" class="col-md-8" method="GET">
+    <div class="form-row">
+      <div class="form-label col-md-1 pad0L">
+        <label for="">
+          搜索:
+        </label>
+      </div>
+      
+      <div class="form-input col-md-8">
+        <input placeholder="在班级名、老师名和学生名中模糊搜索" type="text" 
+          name="search" id="search" value="<%= @search %>">
+      </div>
+      <div class="form-input col-md-1 pad0L">
+        <button type="submit" class="btn primary-bg medium">
+            <span class="button-content">确定</span>
+        </button>
+      </div>
+      <div class="form-input col-md-1">
+        <a href="<%= admin_klasses_path %>" class="btn ui-state-default medium">
+            <span class="button-content">重置</span>
+        </a>
+      </div>
+      <div class="form-input col-md-1">
+        <a href="<%= new_admin_klass_path %>" class="btn ui-state-default medium">
+            <span class="button-content">新增班级</span>
+        </a>
+      </div>
+    </div>
+  </form>
+
+  <% @klasses.each do |klass| %>
+    <div class="klass clearfix mrg20B">
+      <h4 class="heading-1 clearfix bottom-line">
+        <div class="heading-content">
+          <a href="###" class="klass-name"><%= klass.name %></a>&nbsp;&nbsp;
+          <small style="display:inline">
+            id: <%= klass.id %>，
+            年级: <%= grade(klass.grade) %>，
+            班号: <%= klass.number %>，
+            老师: <span style="color: black;"><%= klass.user.username %></span>，
+            学生数: <%= klass.students.length %>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="<%= admin_klass_path(klass) %>" class="btn medium hover-gray tooltip-button" data-method="delete" data-confirm="删除班级同时会删除这个班级的所有学生，确定删除？" title="删除此班级">
+              <i class="glyph-icon icon-trash-o"></i>
+            </a>
+            <a href="<%= edit_admin_klass_path(klass) %>" class="btn medium hover-gray tooltip-button" title="修改班级信息">
+              <i class="glyph-icon icon-pencil"></i>
+            </a>
+          </small>
+        </div>
+      </h4>
+
+      <div class="students">
+        <% klass.students.each do |student| %>
+          <div class="student">
+            <div class="avatar">
+              <img src="<%= student.avatar.url(:medium) %>" alt=""/>
+            </div>
+            <div class="number"><%= student.number %></div>
+            
+            <a class="name" href="javascript:;" data-toggle="dropdown">
+              <%= student.name %>
+              <i class="glyph-icon icon-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu push-left">
+              <!-- 编辑菜单 -->
+              <li>
+                  <%= link_to edit_admin_student_path(student) do %>
+                    <i class="glyph-icon icon-pencil mrg5R"></i>
+                    编辑
+                  <% end %>
+              </li>
+              
+              <!-- 移动菜单 -->
+              <li class="dropdown-submenu">
+                <a href="javascript:;" data-toggle="dropdown" title="">
+                    移动 <%= student.name %> 到
+                </a>
+                <ul class="dropdown-menu bg-white no-shadow">
+                  <% 
+                    @klasses.each do |k| 
+                      if k.id != klass.id
+                  %>
+                  <li>
+                    <%= link_to admin_move_student_to_klass_path(student_id: student.id, klass_id: k.id), { method: :post } do %>
+                      <%= k.name %>
+                    <% end %>
+                  </li>
+                  <% 
+                      end
+                    end
+                  %>
+                </ul>
+              </li>
+              
+              <li class="divider"></li>
+
+              <!-- 删除菜单 -->
+              <li>
+                <%= link_to admin_student_path(student), { class: 'font-red', method: :delete, data: {confirm: '确定删除？'} } do %>
+                  <i class="glyph-icon icon-trash-o mrg5R"></i>
+                  删除 <%= student.name %>
+                <% end %>
+              </li>
+
+            </ul>
+          </div>
+        <% end %>
+        <div class="student add">
+          <div class="avatar">
+            <%= link_to new_admin_student_path(klass_id: klass.id) do %>
+              <%= image_tag 'add.png' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>

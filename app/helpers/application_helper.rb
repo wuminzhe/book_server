@@ -16,4 +16,31 @@ module ApplicationHelper
     end
     return result
   end
+
+  def append_params(url, params)
+    useful_params = {}
+    params.each do |k, v|
+      if not v.blank?
+        useful_params[k] = v
+      end
+    end
+
+    #
+    query_string_arr = []
+    useful_params.each do |k, v|
+      query_string_arr << "#{k}=#{v}"
+    end
+    query_string = query_string_arr.join('&')
+
+    #
+    segs = url.split('?')
+    if segs.length==1
+      return "#{segs[0]}?#{query_string}"
+    elsif segs.length==2
+      return "#{url}&#{query_string}"
+    end
+
+  end
+
+  
 end

@@ -1,8 +1,4 @@
 Book::Application.routes.draw do
-  get "administrators/show"
-  get "pictures/index"
-  get "activities/index"
-  get "klasses/show"
 
   root 'sessions#new'
   resources :users, only: [:show] do
@@ -40,6 +36,7 @@ Book::Application.routes.draw do
   # back
   match '/back/template', to: 'flex#back_template', via: 'get'
   match '/back/template', to: 'flex#save_back_template', via: 'post'
+  match '/back/frames', to: 'flex#back_frames', via: 'get'
 
 
   namespace :admin do
@@ -49,7 +46,10 @@ Book::Application.routes.draw do
     get '/signin', to: 'sessions#new'
     get '/signout', to: 'sessions#destroy'
     get '/dashboard', to: 'dashboard#index'
-    get '/teachers', to: 'teachers#index'
+    resources :teachers
+    resources :students
+    resources :klasses
+    post '/move_student_to_klass', to: 'students#move'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

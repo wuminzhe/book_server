@@ -1,4 +1,6 @@
 class Admin::SessionsController < Admin::BaseController
+  skip_before_filter :signed_in_check
+
   def new
     if signed_in?
       redirect_to current_administrator
@@ -11,9 +13,9 @@ class Admin::SessionsController < Admin::BaseController
     administrator = Administrator.find_by(username: params[:session][:username])
     if administrator && administrator.authenticate(params[:session][:password])
       sign_in administrator, params[:session][:remember_password]
-      redirect_back_or admin_dashboard_url
+      redirect_back_or admin_klasses_path
     else
-      flash[:danger] = '用户名密码不正确！'
+      flash[:error] = '用户名密码不正确！'
       redirect_to admin_url
     end
   end

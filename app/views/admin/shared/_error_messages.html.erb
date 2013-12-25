@@ -1,0 +1,12 @@
+<% if model.errors.any? %>
+  <div id="error_explanation" class="mrg20B">
+    <div class="infobox error-bg">
+      <p>您提交的表单包含了<%= model.errors.count %>个问题。</p>
+    </div>
+    <ul style="color: red">
+      <% model.errors.full_messages.each do |msg| %>
+        <li>* <%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

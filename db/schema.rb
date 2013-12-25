@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131211060539) do
+ActiveRecord::Schema.define(version: 20131224064610) do
 
   create_table "activities", force: true do |t|
     t.string   "title"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20131211060539) do
     t.string   "username"
     t.string   "password_digest"
     t.string   "remember_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "frames", force: true do |t|
+    t.string   "src"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -85,6 +91,7 @@ ActiveRecord::Schema.define(version: 20131211060539) do
   end
 
   add_index "students", ["klass_id"], name: "index_students_on_klass_id"
+  add_index "students", ["phone"], name: "index_students_on_phone", unique: true
 
   create_table "templates", force: true do |t|
     t.text     "content"

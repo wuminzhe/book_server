@@ -39,9 +39,11 @@
     <div class="clear"></div>
 
     <%= form_for(:session, url: admin_sessions_path, html: { class: 'col-md-3 center-margin form-vertical mrg25T' } ) do |f| %>
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-      <% end %>
+
+        <% flash.each do |key, value| %>
+          <div class="infobox <%= key %>-bg"><p><%= value %></p></div>
+        <% end %>
+
 
       <div id="login-form" class="content-box drop-shadow">
 
@@ -67,7 +69,7 @@
             </div>
             <div class="form-input col-md-10">
               <div>
-                <%= f.text_field :password, class: 'form-control', placeholder: '密码' %>
+                <%= f.password_field :password, class: 'form-control', placeholder: '密码' %>
               </div>
             </div>
           </div>

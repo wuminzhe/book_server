@@ -4,6 +4,13 @@ class Student < ActiveRecord::Base
   has_many :pictures, through: :student_picture_associations
   has_many :photo_books
 
+  validates :name, :number, :phone, :klass_id, presence: true
+  validates :number, :phone, numericality: { only_integer: true }
+  validates :number, uniqueness: { scope: :klass_id }
+  validates :phone, uniqueness: true
+
+  mount_uploader :avatar, AvatarUploader
+
   # 根据活动获取这个学生的照片
   def pictures_by_activity(activity)
     pics = []

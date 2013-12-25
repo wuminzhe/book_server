@@ -1,0 +1,84 @@
+
+<div id="page-breadcrumb-wrapper">
+  <div id="page-breadcrumb">
+    <a href="javascript:;" title="Dashboard">
+      <i class="glyph-icon icon-table"></i>
+      业务管理
+    </a>
+    <a href="<%= url_for admin_teachers_path %>" >
+      班级
+    </a>
+    <span class="current">
+        班级信息修改
+    </span>
+  </div>
+</div>
+<!-- #page-breadcrumb-wrapper -->
+
+<div id="page-content">
+
+
+  <h3 class="mrg0T">班级信息修改</h3>
+
+  <div class="divider"></div>
+
+  <%= form_for @klass, url: admin_klass_path(@klass), html: {class: 'col-md-10 center-margin', method: :put} do |f| %>
+    <%= render partial: 'admin/shared/error_messages', locals: { model: @klass} %>
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="klass_name">
+          名称:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-5">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="klass_grade">
+          年级:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-2">
+        <%= f.select(:grade, grades_for_select, {}, {class: 'custom-select'}) %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="klass_number">
+          班号:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-2">
+        <%= f.text_field :number, class: 'spinner-input' %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="klass_number">
+          老师:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-3">
+        <%= f.select(:user_id, teachers_for_select(@klass.user), {}, {class: 'chosen-select'}) %>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <%= f.submit '确定', class: 'btn primary-bg medium', style: 'width: 60px' %>
+
+    or
+
+    <a href="<%= admin_klasses_url %>">返回</a>
+
+  <% end %>
+</div>

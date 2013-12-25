@@ -1,0 +1,112 @@
+<%= stylesheet_link_tag 'admin/students' %>
+<%= javascript_include_tag 'admin/students' %>
+
+<div id="page-breadcrumb-wrapper">
+  <div id="page-breadcrumb">
+    <a href="javascript:;" title="Dashboard">
+      <i class="glyph-icon icon-table"></i>
+      业务管理
+    </a>
+    <a href="<%= url_for admin_teachers_path %>" >
+      学生
+    </a>
+    <span class="current">
+        学生信息编辑
+    </span>
+  </div>
+</div>
+<!-- #page-breadcrumb-wrapper -->
+
+<div id="page-content">
+
+
+  <h3 class="mrg0T">学生信息编辑</h3>
+
+  <div class="divider"></div>
+
+  <%= form_for @student, url: admin_student_path(@student), html: {class: 'col-md-10 center-margin', method: :put} do |f| %>
+    <%= render partial: 'admin/shared/error_messages', locals: { model: @student} %>
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="student_name">
+          姓名:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-10">
+        <%= f.text_field :name, class: 'col-md-6' %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="student_number">
+          学号:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-10">
+        <%= f.text_field :number, class: 'col-md-6' %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="student_phone">
+          家长电话:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-10">
+        <%= f.text_field :phone, class: 'col-md-6' %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="student_avatar">
+          头像:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-10">
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+          <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="max-width: 200px; max-height: 150px;">
+            <%= image_tag(@student.avatar) if @student.avatar? %>
+          </div>
+          <div>
+            <span class="btn btn-default btn-file">
+              <span class="fileinput-new">选择图片</span>
+              <span class="fileinput-exists">更换图片</span>
+              <%= f.file_field :avatar %>
+              <%= f.hidden_field :avatar_cache %>
+            </span>
+            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">删除</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="">
+          班级:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-6">
+        <%= f.select(:klass_id, klasses_for_select, {}, {class: 'chosen-select'}) %>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <%= f.submit '确定', class: 'btn primary-bg medium', style: 'width: 60px' %>
+
+    or
+
+    <a href="<%= admin_klasses_url %>">返回</a>
+
+  <% end %>
+
+</div>

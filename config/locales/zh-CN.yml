@@ -1,0 +1,21 @@
+zh-CN:
+  activerecord:
+    attributes:
+      user:
+        username: '用户名'
+        password: '密码'
+        password_confirmation: '密码确认'
+      klass:
+        name: '班级名称'
+        grade: '年级'
+        number: '班号'
+        user_id: '老师'
+      student:
+        name: '姓名'
+        number: '学号'
+        phone: '家长电话'
+        avatar: '头像'
+        klass_id: '班级'
+  errors:
+    messages:
+      extension_white_list_error: '上传图片格式不正确'

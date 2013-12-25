@@ -6,6 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+puts '清空uploads'
+`rm -rf #{Rails.root}/public/uploads`
+`mkdir #{Rails.root}/public/uploads`
+
 User.delete_all
 user = User.create username: '张老师', password: '123456', password_confirmation: '123456'
 
@@ -29,7 +33,7 @@ Student.delete_all
 students = []
 29.times do |i|
   name = "同学#{i+1}"
-  students << Student.create(name: name, number: i+1, klass: klass, avatar: 'http://www.qqzi.net/uploads/allimg/1202/1500254D4-0.jpg')
+  students << Student.create(name: name, number: i+1, phone: 13851707080+i, klass: klass)
 end
 
 StudentPictureAssociation.delete_all
@@ -42,10 +46,19 @@ StudentPictureAssociation.delete_all
 
 end
 
+Template.delete_all
+template = Template.create(content: '')
+
+PhotoBook.delete_all
+PhotoBook.create(template: template, student: students[1], content: '')
+
 Sticker.delete_all
 Sticker.create src: 'http://115.29.170.136:3000/images/stickers/jmf.jpg'
 Sticker.create src: 'http://115.29.170.136:3000/images/stickers/snb.jpg'
 Sticker.create src: 'http://115.29.170.136:3000/images/stickers/atm.jpg'
+
+Frame.delete_all
+Frame.create id: 5, src: 'http://115.29.170.136:3000/images/masks/mask1.png'
 
 Administrator.delete_all
 Administrator.create( username: 'admin', password: '123456', password_confirmation: '123456')

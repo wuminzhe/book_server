@@ -39,7 +39,7 @@ class FlexController < ApplicationController
 
   def front_template
     student = Student.find(params[:student_id]) #student_id
-
+    logger.debug student.photo_book
     render json: {
         status: 1,
         data: {
@@ -85,6 +85,11 @@ class FlexController < ApplicationController
 
 
     render json: { status: 1, data: { template_id: template.id } }
+  end
+
+  def back_frames
+    frames = Frame.select('id, src')
+    render json: { status: 1, data: frames }
   end
 
   private

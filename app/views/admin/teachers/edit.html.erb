@@ -1,0 +1,60 @@
+
+<div id="page-breadcrumb-wrapper">
+  <div id="page-breadcrumb">
+    <a href="javascript:;" title="Dashboard">
+      <i class="glyph-icon icon-table"></i>
+      业务管理
+    </a>
+    <a href="<%= url_for admin_teachers_path %>" >
+      老师
+    </a>
+    <span class="current">
+        老师信息修改
+    </span>
+  </div>
+</div>
+<!-- #page-breadcrumb-wrapper -->
+
+<div id="page-content">
+
+
+  <h3 class="mrg0T">老师密码修改</h3>
+
+  <div class="divider"></div>
+
+  <%= form_for :teacher, url: admin_teacher_path(@teacher), html: {class: 'col-md-10 center-margin', method: :put} do |f| %>
+    <%= render partial: 'admin/shared/error_messages', locals: { model: @teacher} %>
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="teacher_password">
+          密码:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-10">
+        <%= f.password_field :password, class: 'col-md-6' %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="teacher_password_confirmation">
+          密码确认:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-10">
+        <%= f.password_field :password_confirmation, class: 'col-md-6' %>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <%= f.submit '确定', class: 'btn primary-bg medium', style: 'width: 60px' %>
+
+    or
+
+    <a href="<%= admin_teachers_url %>">返回</a>
+
+  <% end %>
+</div>

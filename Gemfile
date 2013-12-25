@@ -2,9 +2,13 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 gem 'rails', '4.0.0'
+gem 'rails-i18n', '4.0.0'
 gem 'bootstrap-sass', '3.0.2'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'plupload-rails'
+gem 'will_paginate', '~> 3.0'
+gem 'carrierwave', '0.9.0'
+gem 'mini_magick'
 
 group :development do
   gem 'sqlite3', '1.3.8'
