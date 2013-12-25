@@ -506,7 +506,6 @@ button.no-shadow.btn:hover {
 
 a.btn.icon-separator.transparent:hover {
 	-moz-opacity: 0.60;
-	filter: alpha(opacity:60);
 	opacity: 0.60;
 	color: #fff;
 }

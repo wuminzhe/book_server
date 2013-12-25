@@ -108,7 +108,6 @@
     display: block;
     font-weight: bold;
     -moz-opacity:0.80;
-    filter:alpha(opacity:80);
     opacity:0.80;
 }
 
@@ -181,13 +180,11 @@
 .messages-box .messages-content {
     margin-left: 40px;
     -moz-opacity:0.80;
-    filter:alpha(opacity:80);
     opacity:0.80;
 }
 
 .messages-box .messages-time {
     -moz-opacity:0.70;
-    filter:alpha(opacity:70);
     opacity:0.70;
     float: right;
 }
@@ -260,7 +257,6 @@
 
 .progress-box .progress-time {
     -moz-opacity:0.70;
-    filter:alpha(opacity:70);
     opacity:0.70;
     float: right;
 }
@@ -326,7 +322,6 @@
 .profile-box .content-box-header .user-details span {
     display: block;
     -moz-opacity:0.80;
-    filter:alpha(opacity:80);
     opacity:0.80;
     font-size: 14px;
     padding: 3px 0 0;
@@ -377,13 +372,11 @@
 .tile-content span {
     font-size: 25px;
     -moz-opacity:0.70;
-    filter:alpha(opacity:70);
     opacity:0.70;
 }
 
 .tile-content-wrapper small {
     -moz-opacity:0.70;
-    filter:alpha(opacity:70);
     opacity:0.70;
     text-align: right;
     font-size: 14px;
@@ -398,7 +391,6 @@
     top: 50%;
     margin-top: -40px;
     -moz-opacity:0.30;
-    filter:alpha(opacity:30);
     opacity:0.30;
     left: 15px;
 }
@@ -452,7 +444,6 @@
     padding: 13px 0;
     text-align: left;
     -moz-opacity:0.50;
-    filter:alpha(opacity:50);
     opacity:0.50;
 }
 
@@ -511,13 +502,11 @@
 	margin-right: 10px;
 	font-size: 16px;
 	-moz-opacity:0.75;
-	filter:alpha(opacity:75);
 	opacity:0.75;
 }
 
 .todo-box li .sort-handle:hover {
 	-moz-opacity:1;
-	filter:alpha(opacity:100);
 	opacity:1;	
 }
 
@@ -539,13 +528,11 @@
 	min-width: 16px;
 	margin-left: 5px;
 	-moz-opacity:0.75;
-	filter:alpha(opacity:75);
 	opacity:0.75;
 }
 
 .todo-box li.todo-done {
 	-moz-opacity:0.65;
-	filter:alpha(opacity:65);
 	opacity:0.65;
 }
 
@@ -675,7 +662,6 @@ body .button-pane-top {
 
 .content-header small {
     -moz-opacity:0.80;
-    filter:alpha(opacity:80);
     opacity:0.80;
 }
 
@@ -955,7 +941,6 @@ body .button-pane-top {
 	font-size: 12px;
 	padding: 5px 0 0;
 	opacity:0.8;
-	filter:alpha(opacity=80);
 	font-weight: normal;
 }
 
@@ -1237,7 +1222,6 @@ textarea.large-textarea {
 
 .checker.hover,
 .radio.hover {
-    filter: alpha(opacity=90);
     -moz-opacity: 90;
     opacity: 0.9;
 }
@@ -1264,7 +1248,6 @@ textarea.large-textarea {
 div.checker input,
 div.radio input {
     opacity: 0;
-    filter: alpha(opacity=0);
     -moz-opacity: 0;
     border: none;
     background: none;
@@ -1303,7 +1286,6 @@ div.radio input {
 
 div.selector select {
 	opacity: 0;
-	filter: alpha(opacity=0);
 	-moz-opacity: 0;
 	border: none;
 	background: none;
@@ -2953,7 +2935,6 @@ div.selector select {
 	font-size: 12px;
 	color: #000;
     opacity: 0.50;
-    filter: alpha(opacity=50);
     z-index: 2;
     text-align: center;
     text-shadow: 0 0 0 transparent;
@@ -2961,7 +2942,6 @@ div.selector select {
 
 .infobox .infobox-close:hover {
     opacity: 1;
-    filter: alpha(opacity=100);
 }
 
 .bg-white.infobox .bg-white {
@@ -2980,7 +2960,6 @@ div.selector select {
 	padding: 0;
     opacity: 0.85;
     font-size: 12px;
-    filter: alpha(opacity=85);
 }
 
 .infobox-title {
@@ -3430,7 +3409,6 @@ h4 small,
 	line-height: 1.6em;
 	text-transform: none;
 	-moz-opacity:0.60;
-	filter:alpha(opacity:60);
 	opacity:0.60;
 }
 
@@ -7741,7 +7719,6 @@ html {
 
 .infobox p {
 	-moz-opacity:0.85;
-	filter:alpha(opacity:85);
 	opacity:0.85;
 }
 
@@ -9067,7 +9044,6 @@ html {
 .info-box b, 
 .info-box.icon-wrapper .icon-big {
 	-moz-opacity:0.30;
-	filter:alpha(opacity:30);
 	opacity:0.30;
 }
 
@@ -9075,7 +9051,6 @@ html {
 .info-box b, 
 .label-description span {
 	-moz-opacity:0.60;
-	filter:alpha(opacity:60);
 	opacity:0.60;
 }
 
@@ -9083,13 +9058,11 @@ html {
 .no-shadow.transparent.btn:hover i, 
 .ui-datepicker-current.ui-priority-secondary {
 	-moz-opacity:0.80;
-	filter:alpha(opacity:80);
 	opacity:0.80;
 }
 
 .opacity-100 {
 	-moz-opacity:1 !important;
-	filter:alpha(opacity:100) !important;
 	opacity:1 !important;
 }
 
@@ -9146,7 +9119,6 @@ button[disabled],
 .chosen-disabled {
 	cursor: not-allowed !important;
 	-moz-opacity:0.70;
-	filter:alpha(opacity:70);
 	opacity:0.70;
 }
 
@@ -9155,7 +9127,6 @@ input[disabled], select[disabled], textarea[disabled],
 .radio.disabled, .radio.disabled span {
 	background: #fafafa;
 	-moz-opacity:0.70;
-	filter:alpha(opacity:70);
 	opacity:0.70;
 	cursor: not-allowed;
 }
@@ -9169,7 +9140,6 @@ input[disabled], select[disabled], textarea[disabled],
 input[readonly], select[readonly], textarea[readonly] {
 	background: #fdfdfd;
 	-moz-opacity:0.80;
-	filter:alpha(opacity:80);
 	opacity:0.80;
 }
 
@@ -10410,7 +10380,6 @@ a.btn.no-shadow:active, button.btn.no-shadow:active,
 .jcrop-light .jcrop-vline,
 .jcrop-light .jcrop-hline {
   background: #ffffff;
-  filter: alpha(opacity=70) !important;
   opacity: .70!important;
 }
 .jcrop-light .jcrop-handle {
@@ -10424,7 +10393,6 @@ a.btn.no-shadow:active, button.btn.no-shadow:active,
 .jcrop-dark .jcrop-vline,
 .jcrop-dark .jcrop-hline {
   background: #000000;
-  filter: alpha(opacity=70) !important;
   opacity: 0.7 !important;
 }
 .jcrop-dark .jcrop-handle {
@@ -10771,8 +10739,7 @@ body > .jGrowl {
 
 .jGrowl .jGrowl-notification, 
 .jGrowl .jGrowl-closer {
-	opacity: .95;
-	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95); 
+	opacity: .95; 
 	zoom: 1;
 	width: 300px;
 	padding:5px 10px;
@@ -10783,8 +10750,7 @@ body > .jGrowl {
 }
 
 .jGrowl .jGrowl-notification:hover {
-	opacity: 1;
-	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100); 
+	opacity: 1; 
 }
 
 .jGrowl .jGrowl-notification {
@@ -10824,12 +10790,10 @@ body > .jGrowl {
 	font-weight: bold;
 	font-size: 14px;
 	opacity: .95;
-	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95); 
 }
 
 .noty-wrapper:hover {
 	opacity: 1;
-	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100); 
 }
 
 .noty_message {
@@ -11056,7 +11020,6 @@ body > .jGrowl {
 .progressbar-overlay {
 	background: url("../../images/animated-overlay.gif");
 	width: 100%;
-	filter: alpha(opacity=15);
 	opacity: 0.15;
 	z-index: 5;
 }
@@ -11074,7 +11037,6 @@ body > .jGrowl {
 
 .bg-black .progressbar-overlay,
 .bg-black .progressbar-overlay {
-	filter: alpha(opacity=100);
 	opacity: 1;
 }
 /* jQuery UI Slider */
@@ -11178,7 +11140,6 @@ body > .jGrowl {
     display: block;
     position: relative;
     -moz-opacity:1;
-    filter:alpha(opacity:100);
     opacity:1;
     color: #666;
 }
@@ -11220,7 +11181,6 @@ body > .jGrowl {
 .form-wizard > ul > li a .wizard-description small {
     display: block;
     -moz-opacity:0.70;
-    filter:alpha(opacity:70);
     opacity:0.70;
 }
 
@@ -11463,13 +11423,11 @@ body > .jGrowl {
   font-size: 11px;
   line-height: 1.4;
   opacity: 0;
-  filter: alpha(opacity=0);
   visibility: visible;
 }
 
 .tooltip.in {
   opacity: 0.8;
-  filter: alpha(opacity=80);
 }
 
 .tooltip.top {

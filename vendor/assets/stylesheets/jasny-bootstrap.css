@@ -61,7 +61,6 @@ fieldset[disabled] .btn {
   pointer-events: none;
   cursor: not-allowed;
   opacity: 0.65;
-  filter: alpha(opacity=65);
   -webkit-box-shadow: none;
           box-shadow: none;
 }
@@ -891,7 +890,6 @@ input[type="button"].btn-block {
   font-size: 23px;
   cursor: pointer;
   opacity: 0;
-  filter: alpha(opacity=0);
   transform: translate(-300px, 0) scale(4);
   direction: ltr;
 }
