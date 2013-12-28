@@ -56,9 +56,9 @@ template = Template.create(content: '')
 
 PhotoBook.create(template: template, student: students[1], content: '')
 
-Sticker.create src: 'http://115.29.170.136:3000/images/stickers/jmf.jpg'
-Sticker.create src: 'http://115.29.170.136:3000/images/stickers/snb.jpg'
-Sticker.create src: 'http://115.29.170.136:3000/images/stickers/atm.jpg'
+Sticker.create src: '/images/stickers/jmf.jpg'
+Sticker.create src: '/images/stickers/snb.jpg'
+Sticker.create src: '/images/stickers/atm.jpg'
 
 Frame.create id: 5, src: 'http://115.29.170.136:3000/images/masks/mask1.png'
 

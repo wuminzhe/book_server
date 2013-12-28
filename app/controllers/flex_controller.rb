@@ -29,7 +29,7 @@ class FlexController < ApplicationController
           items: []
       }
       pictures.each do |picture|
-        activity_pictures[:items] << { id: picture.id, src: picture.src }
+        activity_pictures[:items] << { id: picture.id, src: picture.src.url, thumb: picture.src.url(:thumb) }
       end
       result[:data][:pictures] << activity_pictures
 
