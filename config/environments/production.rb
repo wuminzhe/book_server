@@ -59,7 +59,7 @@ Book::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += %w( users.css sessions.css klasses.css admin/aui.css admin/klasses.css admin/students.css sessions.js admin/aui.js admin/klasses.js admin/students.js)
+  config.assets.precompile += %w( users.css sessions.css klasses.css admin/aui.css admin/klasses.css admin/students.css admin/activities.css sessions.js admin/aui.js admin/klasses.js admin/students.js)
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

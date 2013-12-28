@@ -9,7 +9,8 @@
       url: '<%= "http://#{request.host_with_port}/upload" %>',
       multipart_params: {
         '<%= request_forgery_protection_token %>': '<%= form_authenticity_token %>',
-        '<%= Rails.application.config.session_options[:key] %>': '<%= request.session_options[:id] %>'
+        '<%= Rails.application.config.session_options[:key] %>': '<%= request.session_options[:id] %>',
+        'activity_id': '<%= @activity.id %>'
       },
       init : {
         FileUploaded: function(up, file, info) {
@@ -31,22 +32,7 @@
   });
 
   $("#upload_dialog_confirm").click(function(){
-    var pl = $("#uploader").pluploadQueue();
-
-    if (pl.files.length > 0) {
-      var data = {
-        'urls': [],
-        'activity_id': <%= @activity.id %>
-      };
-      for(var i=0;i<pl.files.length;i++) {
-        var file = pl.files[i];
-        data.urls.push(file.url);
-      }
-      $.post( '<%= "http://#{request.host_with_port}/pictures" %>', data, function() {
-        window.location = "<%= url_for activity_pictures_path(@activity) %>";
-      });
-    }
-    $('#upload_dialog').modal('hide');
+    window.location = "<%= url_for activity_pictures_path(@activity) %>";
   });
 
   $("#select_images").click(function(){
@@ -225,14 +211,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">上传图片</h4>
       </div>
       <div class="modal-body" style="padding: 0">
         <div id="uploader"></div>
       </div>
       <div class="modal-footer" style="margin-top: 1px">
-        <button type="button" class="btn btn-default" id="upload_dialog_cancel" data-dismiss="modal">取消</button>
         <a id="upload_dialog_confirm" href="#" class="btn btn-primary" disabled="true">确定</a>
       </div>
     </div><!-- /.modal-content -->

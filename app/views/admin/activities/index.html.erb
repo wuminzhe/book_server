@@ -1,0 +1,127 @@
+<%= stylesheet_link_tag 'admin/activities' %>
+
+<div id="page-breadcrumb-wrapper">
+  <div id="page-breadcrumb">
+    <a href="javascript:;" title="Dashboard">
+      <i class="glyph-icon icon-table"></i>
+      业务管理
+    </a>
+    <span class="current">
+        活动
+    </span>
+  </div>
+</div>
+
+<!-- #page-breadcrumb-wrapper -->
+<div id="page-content">
+
+  <form action="<%= admin_activities_path %>" class="col-md-8 pad0L" method="GET">
+    <div class="form-row">
+      <div class="form-input col-md-7">
+        <%= select_tag(:klass_id, options_from_collection_for_select(@klasses, "id", "name")) %>
+      </div>
+
+      <div class="form-input col-md-1 pad0L">
+        <button type="submit" class="btn primary-bg medium">
+            <span class="button-content">切换班级</span>
+        </button>
+      </div>
+      
+    </div>
+  </form>
+
+  <div class="clear pad10A mrg20B" style="border-bottom: 1px solid lightgray">
+    <span style="font-size: 2em;margin-right:15px"><%= @klass.name %></span> 
+    共有 <%= @klass.activities.length %> 个活动
+    <a href="<%= url_for(action: 'new', klass_id: @klass.id) %>" style="float: right" class="btn ui-state-default medium">
+        <span class="button-content">新增活动</span>
+    </a>
+  </div>
+  
+  <div class="activities clear">
+    <% @klass.activities.each do |activity| %>
+
+    <div class="activity clearfix mrg20B">
+      
+      <h4 class="heading-1 clearfix mrg10B">
+        <div class="heading-content">
+          <%= activity.title %>&nbsp;&nbsp;
+          <small style="display:inline">
+            id: <%= activity.id %>，
+
+            <% if activity.show? %>
+              <span class="label bg-green tooltip-button" title="" data-original-title="网站上会看到此活动">展示</span>
+            <% else %>
+              <span class="label bg-orange tooltip-button" title="" data-original-title="网站上不会看到此活动">不展示</span>
+            <% end %>
+            <% unless activity.reserved? %>
+              &nbsp;&nbsp;
+              <a href="<%= edit_admin_activity_path(activity) %>" class="btn medium hover-gray tooltip-button" title="修改活动">
+                <i class="glyph-icon icon-pencil"></i>
+              </a>
+              <a href="<%= url_for(action: 'destroy', id: activity.id, klass_id: @klass.id) %>" class="btn medium hover-gray tooltip-button font-red" data-method="delete" data-confirm="删除后，此活动下的图片会归到临时活动，确定删除？" title="删除此活动">
+                <i class="glyph-icon icon-trash-o"></i>
+              </a>
+            <% else %>
+              <span class="label primary-bg tooltip-button" title="" data-original-title="只有非预置活动可以修改或者删除">预置活动，不可修改</span>
+            <% end %>
+          </small>
+        </div>
+      </h4>
+
+      <div class="pictures">
+        
+        <!-- year tabs -->
+        <% 
+        puts '----------------------------'
+        years = activity.years 
+        puts activity.id
+        p years
+        %>
+        <% if years.length == 0 %>
+          <div class="content-box pad20A mrg0B" style="text-align: center">
+            没有照片
+          </div>
+        <% else %>
+          <!-- 有照片的情况下按年份分图片 -->
+          <div id="tabs_<%= activity.id %>" class="content-box tabs mrg0B">
+            <h3 class="content-box-header bg-gray-alt">
+                <ul class="float-left">
+                    <% years.each do |year| %>
+                    <li <%= Time.now.strftime('%Y') == year.to_s ? 'class="ui-tabs-active ui-state-active"' : '' %>>
+                        <a href="#normal-tabs-<%= year %>" title="<%= year %>">
+                            <%= year %>
+                        </a>
+                    </li>
+                    <% end %>
+                </ul>
+            </h3>
+            <% years.each do |year| %>
+            <div id="normal-tabs-<%= year %>" class="clearfix">
+              <% activity.pictures_of_year(year).each do |picture| %>
+              <div class="picture" style="float:left; margin-right: 20px; margin-bottom: 10px">
+                <img src=" <%= picture.src.url(:square) %>" alt="" style="width: 60px">
+              </div>
+              <% end %>
+            </div>
+            <% end %>
+          </div>
+          <script type="text/javascript">
+            // 这段js目的是将当前年份的tab置为actived
+            $(document).ready(function(){
+              var index = <%= years.index(Time.now.strftime('%Y')) or 0 %>;
+              $('#tabs_<%= activity.id %>').tabs({ active: index });
+            });
+          </script>
+          <!-- end 有照片的情况下按年份分图片 -->
+        <% end %>
+        
+      </div>
+    </div>
+    
+    
+    <% end %>
+  </div>
+  
+
+</div>

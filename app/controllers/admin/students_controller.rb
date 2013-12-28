@@ -57,7 +57,7 @@ class Admin::StudentsController < Admin::BaseController
   private
 
     def student_params
-      result = params.require(:student).permit(:name, :number, :phone, :avatar, :klass_id)
+      params.require(:student).permit(:name, :number, :phone, :avatar, :klass_id)
     end
 
     def get_next_number(klass_id)

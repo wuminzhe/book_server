@@ -46,9 +46,7 @@ class PicturesController < ApplicationController
     # 先克隆出新的图片，然后将新图片绑到目标活动上
     dest_activities.each do |dest_activity|
       pictures.each do |picture|
-        clone = picture.dup
-        clone.save
-        dest_activity.pictures << clone
+        Picture.create(klass: picture.klass, activity: dest_activity, year: picture.year, src: picture.src)
       end
     end
 
@@ -105,11 +103,9 @@ class PicturesController < ApplicationController
   end
 
   def upload
-    tmp_file = params[:file]
-    File.open(Rails.root.join('public', 'uploads', tmp_file.original_filename), 'wb') do |file|
-      file.write(tmp_file.tempfile.read)
-    end
-    render json: { url: "http://#{request.host_with_port}/uploads/#{tmp_file.original_filename}" }
+    Picture.create(src: params[:file], klass: current_user.klass, used: 0, activity_id: params[:activity_id], year: Time.now.strftime('%Y'))
+
+    render text: 'ok'
   end
 
   private

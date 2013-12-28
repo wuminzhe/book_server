@@ -72,7 +72,7 @@
     <tbody>
     <% @teachers.each do |teacher| %>
     <tr>
-      <td><%= teacher.id %></td>
+      <td>#<%= teacher.id %></td>
       <td class="font-bold text-left"><%= teacher.username %></td>
       <td><a href="javascript:;"><%= teacher.klass.nil? ? '' : teacher.klass.name %></a></td>
       <td>

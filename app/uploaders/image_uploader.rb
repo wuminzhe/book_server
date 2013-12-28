@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class AvatarUploader < CarrierWave::Uploader::Base
+class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -13,7 +13,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/#{model.class.to_s.underscore}/#{model.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -21,29 +21,24 @@ class AvatarUploader < CarrierWave::Uploader::Base
     # For Rails 3.1+ asset pipeline compatibility:
     # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   
-    "/images/default_avatar/" + [version_name, "default.png"].compact.join('_')
+    "/images/default_picture/" + [version_name, "default.jpg"].compact.join('_')
   end
 
-  #图片的处理，有不同版本大小，网站可以在不同的地方调用不同的图片大小
-  
+  # Process files as they are uploaded:
+  # process :scale => [200, 300]
+  #
+  # def scale(width, height)
+  #   # do something
+  # end
 
-  version :small do
-    process :resize_to_fill => [16, 16]
+  # Create different versions of your uploaded files:
+  version :thumb do
+    process :resize_to_fit => [130, 130]
   end
 
-  version :medium do
-    process :resize_to_fill => [64, 64]
+  version :square do
+    process :resize_to_fill => [130, 130]
   end
-
-  version :big do
-    process :resize_to_fill => [120, 120]
-  end
-
-  version :large do
-    process :resize_to_fill => [240, 240]
-  end
-
-
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -58,6 +53,5 @@ class AvatarUploader < CarrierWave::Uploader::Base
       "#{Digest::MD5.hexdigest(original_filename)}.#{file.extension}"
     end
   end
-
 
 end

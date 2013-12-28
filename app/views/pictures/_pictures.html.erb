@@ -3,7 +3,7 @@
     <% g.each do |picture| %>
       <div class="col-md-2">
         <a href="###" class="thumbnail" id="<%= picture.id %>">
-          <img src="<%= picture.src %>" alt="...">
+          <img src="<%= picture.src.url(:thumb) %>" alt="...">
         </a>
       </div>
     <% end %>

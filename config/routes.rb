@@ -50,6 +50,7 @@ Book::Application.routes.draw do
     resources :students
     resources :klasses
     post '/move_student_to_klass', to: 'students#move'
+    resources :activities
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

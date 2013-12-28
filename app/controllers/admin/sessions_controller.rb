@@ -3,7 +3,7 @@ class Admin::SessionsController < Admin::BaseController
 
   def new
     if signed_in?
-      redirect_to current_administrator
+      redirect_to admin_klasses_path
     else
       render layout: false
     end

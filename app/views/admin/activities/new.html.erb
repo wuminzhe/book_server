@@ -1,0 +1,70 @@
+<div id="page-breadcrumb-wrapper">
+  <div id="page-breadcrumb">
+    <a href="javascript:;" title="Dashboard">
+      <i class="glyph-icon icon-table"></i>
+      业务管理
+    </a>
+    <a href="<%= admin_klasses_path %>" >
+      活动
+    </a>
+    <span class="current">
+        新增活动
+    </span>
+  </div>
+</div>
+<!-- #page-breadcrumb-wrapper -->
+
+<div id="page-content">
+
+  <h3 class="mrg0T">新增活动</h3>
+
+  <div class="divider"></div>
+
+  <%= form_for @activity, url: admin_activities_path, html: {class: 'col-md-10 center-margin'} do |f| %>
+    <%= render partial: 'admin/shared/error_messages', locals: { model: @activity} %>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="activity_title">
+          活动名:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-5">
+        <%= f.text_field :title %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="activity_klass_id">
+          班级:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-2">
+        <%= f.select(:klass_id, @klasses.collect {|p| [ p.name, p.id ] }) %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+      </div>
+      <div class="form-checkbox-radio col-md-5">
+        <%= f.check_box :show %>
+        <label for="activity_show">
+          展示
+        </label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <%= f.submit '确定', class: 'btn primary-bg medium', style: 'width: 60px' %>
+
+    or
+
+    <a href="<%= url_for(action: 'index', klass_id: @activity.klass_id) %>">返回</a>
+
+  <% end %>
+</div>
