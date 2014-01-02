@@ -25,11 +25,11 @@
             "stickers": [
                 {
                     "id": 1,
-                    "src": "http://xxx/uploads/xxx.jpg"
+                    "src": "/images/stickers/jmf.jpg"
                 },
                 {
                     "id": 2,
-                    "src": "http://xxx/uploads/xxx.jpg"
+                    "src": "/images/stickers/snb.jpg"
                 }
             ],
             "pictures": [
@@ -38,11 +38,13 @@
                     "items": [
                         {
                             "id": 1,
-                            "src": "http://xxx/uploads/xxx.jpg"
+                            "src": "/images/default_picture/default.jpg",
+							 "thumb": "/images/default_picture/thumb_default.jpg"
                         },
                         {
                             "id": 2,
-                            "src": "http://xxx/uploads/yyy.jpg"
+                            "src": "/images/default_picture/default.jpg",
+							 "thumb": "/images/default_picture/thumb_default.jpg"
                         }
                     ]
                 },
@@ -51,11 +53,13 @@
                     "items": [
                         {
                             "id": 3,
-                            "src": "http://xxx/uploads/xxx.jpg"
+                            "src": "/images/default_picture/default.jpg",
+							 "thumb": "/images/default_picture/thumb_default.jpg"
                         },
                         {
                             "id": 4,
-                            "src": "http://xxx/uploads/yyy.jpg"
+                            "src": "/images/default_picture/default.jpg",
+							 "thumb": "/images/default_picture/thumb_default.jpg"
                         }
                     ]
                 }

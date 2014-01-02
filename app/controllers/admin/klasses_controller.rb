@@ -2,7 +2,7 @@ class Admin::KlassesController < Admin::BaseController
   def index
     @search = params[:search] #查询参数
 
-    @klasses = Klass.includes(:user, :students).order(grade: :asc, number: :asc)
+    @klasses = Klass.includes(:user, :students).where(school: current_administrator.school).order(grade: :asc, number: :asc)
 
     if @search.present?
       @klasses = @klasses.where('klasses.name like ? or users.username like ? or students.name like ?', "%#{@search}%", "%#{@search}%", "%#{@search}%")
@@ -30,7 +30,8 @@ class Admin::KlassesController < Admin::BaseController
     page = params[:page]
     search_klass_name = params[:search_klass_name]
 
-    Klass.destroy(klass_id)
+    # 删除这个班级，这个操作会同时删除这个班级的学生和活动
+    Klass.destroy(klass_id) 
 
     redirect_to action: :index, page: page, search_klass_name: search_klass_name
   end
@@ -56,7 +57,9 @@ class Admin::KlassesController < Admin::BaseController
   private
 
     def klass_params
-      params.require(:klass).permit(:name, :grade, :number, :user_id)
+      result = params.require(:klass).permit(:name, :grade, :number, :user_id)
+      result['school_id'] = current_administrator.school.id
+      return result
     end
 
 end

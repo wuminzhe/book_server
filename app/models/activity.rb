@@ -1,6 +1,6 @@
 class Activity < ActiveRecord::Base
   belongs_to :klass
-  has_many :pictures
+  has_many :pictures, dependent: :delete_all
 
   def pictures_of_year(year)
     Picture.where(year: year, activity_id: self.id)

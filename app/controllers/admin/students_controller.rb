@@ -39,16 +39,19 @@ class Admin::StudentsController < Admin::BaseController
 
   def destroy
     student_id = params[:id]
-    Student.delete(student_id)
+    Student.destroy(student_id)
 
     redirect_to admin_klasses_path
   end
 
   def move
-    #将student 移动到 klass
     student_id = params[:student_id]
     klass_id = params[:klass_id]
 
+    # 先将和这个学生绑定的图片解绑
+    StudentPictureAssociation.delete_all(student_id: student_id)
+
+    # 将student 移动到 klass
     Student.where(id: student_id).update_all(klass_id: klass_id, number: get_next_number(klass_id))
 
     redirect_to admin_klasses_path

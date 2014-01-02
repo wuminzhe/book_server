@@ -42,7 +42,7 @@ Book::Application.routes.draw do
   namespace :admin do
     get '', to: 'sessions#new', as: '/'
     resources :sessions, only: [:new, :create, :destroy]
-    resources :administrators, only: [:show]
+    resources :administrators
     get '/signin', to: 'sessions#new'
     get '/signout', to: 'sessions#destroy'
     get '/dashboard', to: 'dashboard#index'
@@ -51,6 +51,7 @@ Book::Application.routes.draw do
     resources :klasses
     post '/move_student_to_klass', to: 'students#move'
     resources :activities
+    resources :schools
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

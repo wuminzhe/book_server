@@ -1,0 +1,66 @@
+<div id="page-breadcrumb-wrapper">
+  <div id="page-breadcrumb">
+    <a href="javascript:;" title="Dashboard">
+      <i class="glyph-icon icon-table"></i>
+      业务管理
+    </a>
+    <span class="current">
+        权限管理
+    </span>
+  </div>
+</div>
+<!-- #page-breadcrumb-wrapper -->
+
+<div id="page-content">
+
+  <h4 class="heading-1 clearfix">
+    <div class="heading-content">
+      权限管理
+    </div>
+    <div class="float-right">
+      <a href="<%= new_admin_administrator_url %>" class="btn small primary-bg" title="">
+        <span class="button-content">
+          <i class="glyph-icon icon-plus float-left"></i>
+          新增管理员
+        </span>
+      </a>
+    </div>
+  </h4>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th></th>
+      <th>管理员用户名</th>
+      <th>管理员类型</th>
+      <th>学校</th>
+      <th>添加时间</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @administrators.each do |administrator| %>
+    <tr>
+      <td>#<%= administrator.id %></td>
+      <td class="font-bold text-left"><%= administrator.username %></td>
+      <td><%= administrator.typo_name %></td>
+      <td><%= administrator.typo==1 ? administrator.school.name : '' %></td>
+      <td><%= administrator.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+      <td>
+
+        <a href="<%= edit_admin_administrator_path(administrator) %>" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="Edit">
+          <i class="glyph-icon icon-edit"></i>
+        </a>
+
+        <%= link_to admin_administrator_path(administrator), {method: :delete, class: 'btn small bg-red tooltip-button', title: 'Remove', data: {:confirm => '确定删除？'}} do %>
+          <i class="glyph-icon icon-remove"></i>
+        <% end %>
+
+      </td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</div>
+<!-- #page-content -->

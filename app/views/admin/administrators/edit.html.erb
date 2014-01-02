@@ -1,0 +1,120 @@
+<% content_for :javascript do %>
+  <script>
+
+    function update_school_id_row() {
+      if($("#administrator_typo").val() == 1) {
+        $("#administrator_school_id").attr("disabled",false);
+        $("#school_id_row").show();
+      }else if($("#administrator_typo").val() == 0) {
+        $("#administrator_school_id").attr("disabled",true);
+        $("#school_id_row").hide();
+      }
+    }
+
+    $(document).ready(function(){
+      update_school_id_row();
+      $("#administrator_typo").change(function(){
+        update_school_id_row();
+      });
+    });
+    
+
+    
+  </script>
+<% end %>
+
+<div id="page-breadcrumb-wrapper">
+  <div id="page-breadcrumb">
+    <a href="javascript:;" title="Dashboard">
+      <i class="glyph-icon icon-table"></i>
+      业务管理
+    </a>
+    <a href="<%= url_for admin_administrators_path %>" >
+      权限管理
+    </a>
+    <span class="current">
+        编辑管理员
+    </span>
+  </div>
+</div>
+<!-- #page-breadcrumb-wrapper -->
+
+<div id="page-content">
+
+
+  <h3 class="mrg0T">编辑管理员</h3>
+
+  <div class="divider"></div>
+
+  <%= form_for @administrator, url: admin_administrator_path, html: {class: 'col-md-10 center-margin'} do |f| %>
+    <%= render partial: 'admin/shared/error_messages', locals: { model: @administrator} %>
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="administrator_username">
+          管理员用户名:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-10">
+        <%= f.text_field :username, class: 'col-md-6' %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="administrator_password">
+          密码:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-10">
+        <%= f.password_field :password, class: 'col-md-6' %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="administrator_password_confirmation">
+          密码确认:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-10">
+        <%= f.password_field :password_confirmation, class: 'col-md-6' %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="administrator_typo">
+          管理员类型:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-5">
+        <%= f.select :typo, [['管理员', 0], ['学校管理员', 1]], disabled: true %>
+      </div>
+    </div>
+
+    <div class="form-row" id="school_id_row">
+      <div class="form-label col-md-2">
+        <label for="administrator_school_id">
+          学校:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-5">
+        <%= f.select :school_id, School.where(status: 1).collect {|p| [ p.name, p.id ] } %>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <%= f.submit '确定', class: 'btn primary-bg medium', style: 'width: 60px' %>
+
+    or
+
+    <a href="<%= admin_administrators_path %>">返回</a>
+
+  <% end %>
+</div>

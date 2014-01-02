@@ -5,7 +5,7 @@ class Admin::TeachersController < Admin::BaseController
     @teacher_name = params[:teacher_name] #查询参数，老师的名字
     @klass_name = params[:klass_name] #查询参数，班级的名称
 
-    @teachers = User.includes(:klass)
+    @teachers = User.includes(:klass).where(school: current_administrator.school)
 
     if @teacher_name.present?
       @teachers = @teachers.username_like(@teacher_name)
@@ -64,7 +64,9 @@ class Admin::TeachersController < Admin::BaseController
   private
 
     def teacher_params
-      params.require(:teacher).permit(:username, :password, :password_confirmation)
+      result = params.require(:teacher).permit(:username, :password, :password_confirmation)
+      result["school_id"] = current_administrator.school.id
+      return result
     end
 
 

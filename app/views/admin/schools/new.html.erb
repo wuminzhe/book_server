@@ -1,0 +1,48 @@
+
+<div id="page-breadcrumb-wrapper">
+  <div id="page-breadcrumb">
+    <a href="javascript:;" title="Dashboard">
+      <i class="glyph-icon icon-table"></i>
+      业务管理
+    </a>
+    <a href="<%= url_for admin_teachers_path %>" >
+      学校管理
+    </a>
+    <span class="current">
+        新增学校
+    </span>
+  </div>
+</div>
+<!-- #page-breadcrumb-wrapper -->
+
+<div id="page-content">
+
+
+  <h3 class="mrg0T">新增学校</h3>
+
+  <div class="divider"></div>
+
+  <%= form_for @school, url: admin_schools_path, html: {class: 'col-md-10 center-margin'} do |f| %>
+    <%= render partial: 'admin/shared/error_messages', locals: { model: @school} %>
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="school_name">
+          学校名称:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-10">
+        <%= f.text_field :name, class: 'col-md-6' %>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <%= f.submit '确定', class: 'btn primary-bg medium', style: 'width: 60px' %>
+
+    or
+
+    <a href="<%= admin_schools_url %>">返回</a>
+
+  <% end %>
+</div>

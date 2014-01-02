@@ -1,0 +1,72 @@
+
+
+<div id="page-breadcrumb-wrapper">
+  <div id="page-breadcrumb">
+    <a href="javascript:;" title="Dashboard">
+      <i class="glyph-icon icon-table"></i>
+      业务管理
+    </a>
+    <span class="current">
+        学校管理
+    </span>
+  </div>
+</div>
+<!-- #page-breadcrumb-wrapper -->
+
+<div id="page-content">
+
+  <h4 class="heading-1 clearfix">
+    <div class="heading-content">
+      学校管理
+    </div>
+    <div class="float-right">
+      <a href="<%= new_admin_school_url %>" class="btn small primary-bg" title="">
+        <span class="button-content">
+          <i class="glyph-icon icon-plus float-left"></i>
+          新增学校
+        </span>
+      </a>
+    </div>
+  </h4>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th></th>
+      <th>学校名称</th>
+      <th>班级数量</th>
+      <th>老师数量</th>
+      <th>管理员数量</th>
+      <th>添加时间</th>
+      <th>状态</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @schools.each do |school| %>
+    <tr>
+      <td>#<%= school.id %></td>
+      <td class="font-bold text-left" style="<%= school.status==0 ? 'text-decoration: line-through' : '' %>"><%= school.name %></td>
+      <td><%= school.klasses.length %></td>
+      <td><%= school.teachers.length %></td>
+      <td><%= school.administrators.length %></td>
+      <td><%= school.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+      <td><%= school.status==0 ? '删除' : '正常' %></td>
+      <td>
+        <% if school.status!=0 %>
+          <a href="<%= edit_admin_school_path(school) %>" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="Edit">
+            <i class="glyph-icon icon-edit"></i>
+          </a>
+
+          <%= link_to admin_school_path(school), {method: :delete, class: 'btn small bg-red tooltip-button', title: 'Remove', data: {:confirm => '确定删除？'}} do %>
+            <i class="glyph-icon icon-remove"></i>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</div>
+<!-- #page-content -->

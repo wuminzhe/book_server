@@ -16,6 +16,8 @@ zh-CN:
         phone: '家长电话'
         avatar: '头像'
         klass_id: '班级'
+      school:
+        name: '学校名称'
   errors:
     messages:
       extension_white_list_error: '上传图片格式不正确'

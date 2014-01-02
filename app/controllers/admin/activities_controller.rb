@@ -1,6 +1,6 @@
 class Admin::ActivitiesController < Admin::BaseController
   def index
-    @klasses = Klass.all
+    @klasses = Klass.where(school: current_administrator.school)
     unless params[:klass_id].present?
       @klass = Klass.first
     else
@@ -10,8 +10,7 @@ class Admin::ActivitiesController < Admin::BaseController
 
   def new
     @activity = Activity.new(klass_id: params[:klass_id], show: 1)
-    p @activity
-    @klasses = Klass.all
+    @klasses = Klass.where(school: current_administrator.school)
   end
 
   def create

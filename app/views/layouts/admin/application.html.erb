@@ -40,7 +40,12 @@
   <!-- 侧边栏 -->
   <div id="page-sidebar">
     <div id="header-logo">
-      印象网络 <i class="opacity-80"></i>
+      <% if current_administrator.typo==0 %>
+        印象网络
+      <% elsif current_administrator.typo==1 %>
+        <%= current_administrator.school.name %>
+      <% end %>
+      <i class="opacity-80"></i>
 
       <a href="javascript:;" class="tooltip-button" data-placement="bottom" title="Close sidebar" id="close-sidebar">
         <i class="glyph-icon icon-align-justify"></i>
@@ -58,36 +63,59 @@
     </div>
     <div id="sidebar-menu" class="scrollable-content">
     <ul>
+
     <li>
       <a href="<%= admin_dashboard_path %>" title="Dashboard">
         <i class="glyph-icon icon-dashboard"></i>
         主面板
       </a>
     </li>
-    <li>
-      <a href="<%= admin_teachers_path %>" title="老师">
-        <i class="glyph-icon icon-chevron-right"></i>
-        老师
-      </a>
-    </li>
-    <li>
-      <a href="<%= admin_klasses_path %>" title="班级">
-        <i class="glyph-icon icon-chevron-right"></i>
-        班级
-      </a>
-    </li>
-    <li>
-      <a href="<%= admin_activities_path %>" title="活动">
-        <i class="glyph-icon icon-chevron-right"></i>
-        活动
-      </a>
-    </li>
-    <li>
-      <a href="dashboard_panels.html" title="Dashboard panels">
-        <i class="glyph-icon icon-chevron-right"></i>
-        模板
-      </a>
-    </li>
+    
+    <% if current_administrator.typo==0 #大管理员 %>
+      <li>
+        <a href="<%= admin_schools_path %>" title="学校管理">
+          <i class="glyph-icon icon-flag"></i>
+          学校管理
+        </a>
+      </li>
+
+      <li>
+        <a href="<%= admin_administrators_path %>" title="权限管理">
+          <i class="glyph-icon icon-flag"></i>
+          权限管理
+        </a>
+      </li>
+    <% end %>
+    
+    <% if current_administrator.typo==1 #学校管理员 %>
+      <li>
+        <a href="<%= admin_teachers_path %>" title="老师">
+          <i class="glyph-icon icon-users"></i>
+          老师管理
+        </a>
+      </li>
+
+      <li>
+        <a href="<%= admin_klasses_path %>" title="班级">
+          <i class="glyph-icon icon-leaf"></i>
+          班级管理
+        </a>
+      </li>
+      <li>
+        <a href="<%= admin_activities_path %>" title="活动">
+          <i class="glyph-icon icon-camera"></i>
+          活动管理
+        </a>
+      </li>
+
+      <li>
+        <a href="###" title="Dashboard panels">
+          <i class="glyph-icon icon-book"></i>
+          模板管理
+        </a>
+      </li>
+    <% end %>
+    
 
     <li>
       <a href="javascript:;" title="统计分析">
@@ -170,8 +198,9 @@
     <div id="page-main-wrapper">
 
       <div id="page-header" class="clearfix">
-        <div id="page-header-wrapper" class="clearfix">
 
+        <div id="page-header-wrapper" class="clearfix">
+        
         <div class="top-icon-bar dropdown">
           <a href="javascript:;" title="" class="user-ico clearfix" data-toggle="dropdown">
             <span><%= current_administrator.username %></span>
@@ -196,11 +225,9 @@
                 <span class="font-bold">退出登录</span>
               </a>
             </li>
-
-
-
           </ul>
         </div>
+        
 
         </div>
       </div>

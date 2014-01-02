@@ -1,6 +1,6 @@
 class Student < ActiveRecord::Base
   belongs_to :klass
-  has_many :student_picture_associations
+  has_many :student_picture_associations, dependent: :delete_all
   has_many :pictures, through: :student_picture_associations
   has_many :photo_books
 
@@ -29,6 +29,8 @@ class Student < ActiveRecord::Base
         return pb
       end
     end
+    puts '----------------------'
+    return nil
   end
 
   def add_pictures(picture_ids)

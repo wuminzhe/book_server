@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_one :klass
+  belongs_to :school
 
   before_create :create_remember_token
 

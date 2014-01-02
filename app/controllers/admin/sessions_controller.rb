@@ -3,7 +3,7 @@ class Admin::SessionsController < Admin::BaseController
 
   def new
     if signed_in?
-      redirect_to admin_klasses_path
+      redirect_to current_administrator.home
     else
       render layout: false
     end
@@ -13,7 +13,7 @@ class Admin::SessionsController < Admin::BaseController
     administrator = Administrator.find_by(username: params[:session][:username])
     if administrator && administrator.authenticate(params[:session][:password])
       sign_in administrator, params[:session][:remember_password]
-      redirect_back_or admin_klasses_path
+      redirect_back_or current_administrator.home
     else
       flash[:error] = '用户名密码不正确！'
       redirect_to admin_url

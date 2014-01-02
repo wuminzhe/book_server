@@ -1,7 +1,11 @@
 class Klass < ActiveRecord::Base
   belongs_to :user
-  has_many :activities
-  has_many :students, -> { order(number: :asc) }, dependent: :delete_all
+  belongs_to :school
+
+  # destroy这个班级，会级联删除这个班级下的活动，然后继续级联删除这个班级的照片
+  has_many :activities, dependent: :destroy
+  # destroy这个班级，会级联删除这个班级下的学生
+  has_many :students, -> { order(number: :asc) }, dependent: :destroy
   has_many :pictures
 
   validates :name, :grade, :number, :user_id, presence: true

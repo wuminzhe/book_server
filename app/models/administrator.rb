@@ -1,4 +1,8 @@
 class Administrator < ActiveRecord::Base
+  belongs_to :school
+  has_many :administrator_role_associations
+  has_many :roles, through: :administrator_role_associations
+  
   before_create :create_remember_token
 
   validate :username, presence: true,
@@ -14,6 +18,16 @@ class Administrator < ActiveRecord::Base
 
   def Administrator.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def typo_name
+    if self.typo == 0
+      return '管理员'
+    elsif self.typo == 1
+      return '学校管理员'
+    else
+      return '管理员'
+    end
   end
 
   private
