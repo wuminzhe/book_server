@@ -38,8 +38,11 @@ class Admin::TeachersController < Admin::BaseController
     page = params[:page]
     teacher_name = params[:teacher_name]
 
-    User.delete(teacher_id)
+    User.destroy(teacher_id)
 
+    redirect_to action: :index, page: page, teacher_name: teacher_name
+  rescue ActiveRecord::DeleteRestrictionError
+    flash[:error] = ''
     redirect_to action: :index, page: page, teacher_name: teacher_name
   end
 

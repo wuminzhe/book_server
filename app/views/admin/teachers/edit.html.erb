@@ -26,6 +26,30 @@
     <%= render partial: 'admin/shared/error_messages', locals: { model: @teacher} %>
     <div class="form-row">
       <div class="form-label col-md-2">
+        <label for="teacher_username">
+          用户名:
+          <span class="required"></span>
+        </label>
+      </div>
+      <div class="form-input col-md-10">
+        <%= @teacher.username %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
+        <label for="teacher_name">
+          姓名:
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="form-input col-md-10">
+        <%= f.text_field :name, class: 'col-md-6' %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label col-md-2">
         <label for="teacher_password">
           密码:
           <span class="required">*</span>

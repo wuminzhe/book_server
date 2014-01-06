@@ -16,8 +16,8 @@ school0 = School.create name: '南京市百家湖幼儿园'
 school1 = School.create name: '南京市鼓楼区育红幼儿园'
 
 puts 'create teachers'
-teacher0 = User.create username: '张老师', password: '123456', password_confirmation: '123456', school: school0
-teacher1 = User.create username: '李老师', password: '123456', password_confirmation: '123456', school: school1
+teacher0 = User.create username: '张老师', name: '张果老', password: '123456', password_confirmation: '123456', school: school0
+teacher1 = User.create username: '李老师', name: '李逵', password: '123456', password_confirmation: '123456', school: school1
 
 puts 'create klasses'
 klass0 = Klass.create name: '中2班', grade: 2, number: 2, user: teacher0, school: school0
